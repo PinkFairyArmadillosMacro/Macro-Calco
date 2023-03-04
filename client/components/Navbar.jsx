@@ -5,12 +5,22 @@ const Navbar = () => {
     return (
         <nav>
             <ul>
-                <span>
+                <h1>
                     Macro Calco
-                </span>
+                </h1>
             </ul>
             <ul className='nav-links'>
                 <Link to='/'>
+                    <a>Home</a>
+                </Link>
+                <Link to='/findrecipe'>
+                    <a>Find Recipe</a>
+                </Link>
+                <Link to='/savedrecipes'>
+                    <a>Saved Recipes</a>
+                </Link>
+                <Link to='/logout'>
+                    <button>Logout</button>
                 </Link>
             </ul>
         </nav>
