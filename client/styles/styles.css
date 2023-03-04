@@ -5,11 +5,20 @@
   --background-color: #EDF1D6;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body{
   background-color: var(--background-color);
   margin: 0;
 }
+
+/**************** 
+ NAVBAR               
+*****************/
 
 nav {
   display: flex;
@@ -18,6 +27,10 @@ nav {
   height: 90px;
   background-color: var(--secondary-color);
   font-family: 'Montserrat';
+}
+
+nav h1 {
+  margin-left: 2rem;
 }
 
 .nav-links {
@@ -73,3 +86,7 @@ nav {
   margin: 1rem 0;
 }
 
+
+#macro-setup-container{
+  
+}

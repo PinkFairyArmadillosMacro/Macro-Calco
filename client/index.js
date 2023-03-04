@@ -4,7 +4,10 @@ import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router
 import App from "./components/App.jsx";
 import Home from "./components/Home.jsx";
 import Login from "./components/Login.jsx";
+import FindRecipe from "./components/FindRecipe.jsx";
+import SavedRecipes from "./components/SavedRecipes.jsx";
 import styles from './styles/styles.css';
+import SetUp from "./components/SetUp.jsx";
 
 const router = createBrowserRouter([
   {
@@ -12,14 +15,22 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: 'new_user',
+        element: <SetUp/>
+      }, 
+      {
         path: 'home',
         element: <Home/>
+      }, 
+      {
+        path: 'find',
+        element: <FindRecipe />
+      },
+      {
+        path: 'saved',
+        element: <SavedRecipes/>
       }
     ]
-  },
-  {
-    path: "home",
-    element: <Home />
   }
 ])
 
