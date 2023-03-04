@@ -8,6 +8,7 @@ import Login from "./Login.jsx";
 const App = () => {
   return(
     <div>
+      <Navbar />
       <Login/>
     </div>
   )
