@@ -10,7 +10,7 @@ const Navbar = () => {
                 </h1>
             </ul>
             <ul className='nav-links'>
-                <Link to='/'>
+                <Link to='/home'>
                     <a>Home</a>
                 </Link>
                 <Link to='/findrecipe'>

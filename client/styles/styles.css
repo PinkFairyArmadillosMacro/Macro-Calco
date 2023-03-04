@@ -17,6 +17,7 @@ nav {
   justify-content: space-between;
   height: 90px;
   background-color: var(--secondary-color);
+  font-family: 'Montserrat';
 }
 
 .nav-links {
@@ -32,6 +33,7 @@ nav {
 }
 
 .nav-links button {
+  font-family: 'Montserrat';
   padding: 0.65rem;
   margin-right: 0.75rem;
 }
@@ -45,9 +47,10 @@ nav {
 }
 
 #login-container{
-font-family: '';
+  font-family: 'Montserrat';
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 400px;
   height: 500px;
   background-color: white;
@@ -56,6 +59,7 @@ font-family: '';
 }
 
 #form-container{
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   width: 60%;
@@ -65,7 +69,7 @@ font-family: '';
   margin: 0;
 }
 
-.input-title {
-  margin: 1rem 0 ;
+.input-tag{
+  margin: 1rem 0;
 }
 
