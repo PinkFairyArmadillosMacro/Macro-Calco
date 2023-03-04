@@ -1,6 +1,8 @@
 const express = require('express');
-const app = express();
 const path = require('path');
+
+const app = express();
+
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
@@ -17,14 +19,18 @@ app.get('/', (req,res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'))
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/login.html'));
-});
-
 app.get('/signup', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/signup.html'));
 });
 
+app.post('/signup',
+  userController.createUser,
+  // cookieController.setSSIDCookie,
+  // sessionController.startSession,
+  (req, res) => {
+    // what should happen here on successful sign up?
+    res.redirect('/homepage');
+  });
 
 // app.get('/', cookieController.setCookie, (req, res) => {
 //   res.sendFile(path.resolve(__dirname, '../client/index.html'));
@@ -32,14 +38,7 @@ app.get('/signup', (req, res) => {
 
 
 
-// app.post('/signup',
-//   userController.createUser,
-//   cookieController.setSSIDCookie,
-//   sessionController.startSession,
-//   (req, res) => {
-//     // what should happen here on successful sign up?
-//     res.redirect('/secret');
-//   });
+
 
 
 // /**
@@ -64,42 +63,6 @@ app.get('/signup', (req, res) => {
 //   userController.getAllUsers, 
 //   (req, res) => {res.send({ users: res.locals.users });
 // })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
