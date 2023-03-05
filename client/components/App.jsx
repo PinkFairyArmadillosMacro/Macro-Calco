@@ -6,7 +6,7 @@ import Login from "./Login.jsx";
 import Navbar from "./Navbar.jsx";
 import Home from "./Home.jsx";
 import FindRecipe from "./FindRecipe.jsx";
-import SavedRecipes from './SavedRecipes.jsx'
+import MyAccount from "./MyAccount.jsx";
 import SetUp from "./SetUp.jsx";
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="new_user" element={<SetUp/>}/>
         <Route path="home" element={<Home/>}></Route>
         <Route path="find" element={<FindRecipe/>}></Route>
-        <Route path="saved" element={<SavedRecipes/>}></Route>
+        <Route path="myaccount" element={<MyAccount/>}></Route>
       </Routes>
 
     </div>

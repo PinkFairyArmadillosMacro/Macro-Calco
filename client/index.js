@@ -6,6 +6,7 @@ import Home from "./components/Home.jsx";
 import Login from "./components/Login.jsx";
 import FindRecipe from "./components/FindRecipe.jsx";
 import SavedRecipes from "./components/SavedRecipes.jsx";
+import MyAccount from "./components/MyAccount.jsx";
 import styles from './styles/styles.css';
 import SetUp from "./components/SetUp.jsx";
 
@@ -27,8 +28,8 @@ const router = createBrowserRouter([
         element: <FindRecipe />
       },
       {
-        path: 'saved',
-        element: <SavedRecipes/>
+        path: 'myaccount',
+        element: <MyAccount/>
       }
     ]
   }
