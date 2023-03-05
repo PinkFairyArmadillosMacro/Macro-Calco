@@ -1,0 +1,55 @@
+/**************** 
+ RECIPE TEMPLATE               
+*****************/
+
+.recipe-template {
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  font-family: var(--main-font);
+}
+
+.recipe-image {
+  font-size: 50px;
+}
+
+.recipe-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-info-name {
+  font-size: 50px;
+}
+
+.recipe-info-macros-container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  margin: 1rem;
+}
+
+.serving-macros-title,
+.macros-count-title,
+.recipe-info-macros-amount,
+.recipe-info-macros-count {
+  font-size: 10px;
+  border: solid 1px black;
+  text-align: center;
+}
+
+.macros-summary,
+.macros-count-label {
+  font-size: 15px;
+  border: solid 1px black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.recipe-delete-btn {
+  font-family: var(--main-font);
+}

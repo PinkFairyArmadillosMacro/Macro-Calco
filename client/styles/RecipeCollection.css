@@ -1,0 +1,34 @@
+/**************** 
+RECIPE COLLECTION
+*****************/
+
+.recipe-collection-container {
+  background-color: lightblue;
+  padding: 1.5rem;
+  width: 40%;
+  font-family: var(--main-font);
+}
+
+.collection-totals {
+  width: 70%;
+}
+
+.collection-total-macros {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-collection-table {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  justify-content: center;
+  width: 50%;
+}
+
+.recipe-collection-table-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0px;
+}
