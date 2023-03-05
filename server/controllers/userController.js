@@ -1,10 +1,6 @@
 const models = require("../models/models");
 
 const userController = {};
-
-
-models.User.create
-models.Recipe.create
 // /**
 //  * getAllUsers - retrieve all users from the database and stores it into res.locals
 //  * before moving on to next middleware.
@@ -27,12 +23,27 @@ models.Recipe.create
 /**
  * createUser - create and save a new User into the database.
  */
-userController.createUser = (req, res, next) => {
+userController.createUser = async (req, res, next) => {
   //TODO: hash password
-  User.create(req.body)
-    .then(() => next())
-    .catch((error) => next(error));
-};
+  const { username, password } = req.body
+  if(await User.exists({ username })) {
+    console.log('that user name exists!')
+  }
+  else{
+    models.User.create({ username, password }, (err, user) => {
+      if (err) {
+        return next({message: {err: 'error in createUser!'}});
+      }
+      res.locals.data = user;
+      return next();
+    })
+    };
+  }
+
+  userController.assignMacros = (req,res,next) => {
+    const {carbs, protein, fats} = req.body;
+    
+  }
 
 // /**
 //  * verifyUser - Obtain username and password from the request body, locate
@@ -56,4 +67,4 @@ userController.createUser = (req, res, next) => {
 //   }
 // };
 
-// module.exports = userController;
+module.exports = userController;
