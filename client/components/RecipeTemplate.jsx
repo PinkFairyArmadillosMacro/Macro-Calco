@@ -1,15 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import MyPieChart from './PieChart.jsx';
 
 const RecipeTemplate = () => {
+
   const deleteRecipe = () => {};
 
   const redirectToInfoPage = () => {};
 
   return (
     <div className="recipe-template">
-      <div className="recipe-image">IMAGE</div>
+      <div className="recipe-image" onClick={redirectToInfoPage}>IMAGE</div>
       <div className="recipe-info">
         <p className="recipe-info-name"> Name </p>
         <div className="recipe-info-macros-container">
@@ -38,8 +39,9 @@ const RecipeTemplate = () => {
           <p className="recipe-info-macros-count">20</p>
         </div>
       </div>
-      <div className="crud-buttons">
-        <button className="delete-btn" onClick={deleteRecipe}>
+      <MyPieChart />
+      <div className="recipe-crud-buttons">
+        <button className="recipe-delete-btn" onClick={deleteRecipe}>
           Delete
         </button>
       </div>
