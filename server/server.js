@@ -5,6 +5,9 @@ const app = express();
 
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const userController = require('./controllers/userController');
+const recipeController = require('./controllers/recipeController');
+const collectionController = require('./controllers/collectionController');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -30,6 +33,36 @@ app.post('/signup',
   (req, res) => {
     // what should happen here on successful sign up?
     res.redirect('/homepage');
+  });
+
+  
+  app.post('/collection',
+  recipeController.saveRecipes,
+  collectionController.createCollection,
+  // cookieController.setSSIDCookie,
+  // sessionController.startSession,
+  (req, res) => {
+    // what should happen here on successful sign up?
+    res.redirect('/homepage');
+  });
+
+
+  app.delete('/collection',
+  collectionController.deleteCollection, 
+  (req, res) => {
+
+  })
+
+  app.delete('/recipe',
+  recipeController.deleteRecipe,
+  (req, res) => {
+
+  });
+
+  app.patch('/macros',
+  userController.assignMacros,
+  (req, res) => {
+
   });
 
 // app.get('/', cookieController.setCookie, (req, res) => {

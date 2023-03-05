@@ -1,14 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 
 const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-
+  // collection : [{recipe1, recipe2, recipe3}, {recipe1,recipe2,recipe3}]
+  collections: [{ type: Schema.Types.ObjectId, ref: "collection" }],
+  proteinGoal: { type: Number, required: true },
+  carbGoal: { type: Number, required: true },
+  fatGoal: { type: Number, required: true },
 });
 
-const User = mongoose.model('user', userSchema);
+const User = mongoose.model("user", userSchema);
 const recipeSchema = new Schema({
   label: String,
   image: String,
@@ -18,36 +21,30 @@ const recipeSchema = new Schema({
   healthLabels: Array,
   cautions: Array,
   calories: Number,
-  cuisineType,
-  totalTime,
-  totalNutrients
-})
-const Recipe = mongoose.model('recipe', recipeSchema);
+  carbs: Number,
+  protein: Number,
+  fat: Number,
+  cuisineType: Array,
+  totalTime: Number,
+});
+const Recipe = mongoose.model("recipe", recipeSchema);
 
-const {
-  label,
-  image,
-  shareAs,
-  yield,
-  dietLabels,
-  healthLabels,
-  cautions,
-  calories,
-  cuisineType,
-  totalTime,
-  totalNutrients
-        } = recipe;
+const collectionSchema = new Schema({
+  name: { type: String, required: true },
+  totalCarbs: Number,
+  totalProtein: Number,
+  totalFat: Number,
+  totalCalories: Number,
+  recipeIds: [{ type: Schema.Types.ObjectId, ref: "recipe" }],
+});
 
+const Collection = mongoose.model("collection", collectionSchema);
 
-  const {FAT, CHOCDF, PROCNT} = totalNutrients;
-
-
-
-module.exports = {User, Recipe};
+module.exports = { User, Recipe, Collection };
 
 /**
-* Hint: Why is bcrypt required here?
-*/
+ * Hint: Why is bcrypt required here?
+ */
 // const SALT_WORK_FACTOR = 10;
 // const bcrypt = require('bcryptjs');
 
