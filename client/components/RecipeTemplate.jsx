@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 
 const RecipeTemplate = () => {
 
+  const deleteRecipe = () => {
+
+  }
+
   const redirectToInfoPage = () => {
 
   }
@@ -24,7 +28,7 @@ const RecipeTemplate = () => {
               <p className='recipe-info-macros-amount'> KCAL: </p>
             </div>
             <div className="single-serving-macros">
-            <p className='serving-macros-title'> SERVING SIZE </p>
+              <p className='serving-macros-title'> SERVING SIZE </p>
               <p className='recipe-info-macros-amount'> CARB: </p>
               <p className='recipe-info-macros-amount'> FAT: </p>
               <p className='recipe-info-macros-amount'> PROTEIN: </p>
@@ -33,7 +37,7 @@ const RecipeTemplate = () => {
           </div>
         </div>
         <div className="crud-buttons">
-          <button className="delete-btn">
+          <button className="delete-btn" onClick={deleteRecipe}>
             Delete
           </button>
         </div>

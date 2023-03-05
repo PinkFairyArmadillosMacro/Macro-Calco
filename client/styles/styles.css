@@ -134,6 +134,10 @@ nav h1 {
   font-family: 'Montserrat';
 }
 
+.recipe-image {
+  
+}
+
 .recipe-info {
   display: flex;
   flex-direction: column;
