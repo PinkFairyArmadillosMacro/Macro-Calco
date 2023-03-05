@@ -51,6 +51,10 @@ nav h1 {
   margin-right: 0.75rem;
 }
 
+/**************** 
+  LOGIN            
+*****************/
+
 #login-component-container{
   display: flex;
   justify-content: center;
@@ -86,7 +90,80 @@ nav h1 {
   margin: 1rem 0;
 }
 
+/**************** 
+ SET UP MACROS              
+*****************/
 
 #macro-setup-container{
-  
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+#macro-setup-form-container{
+  font-family: 'Montserrat';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#macro-form-container{
+
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+#macros-subtext{
+  opacity: 50%;
+  margin: 1rem 0 ;
+}
+
+
+/**************** 
+ RECIPE TEMPLATE               
+*****************/
+
+.recipe-template {
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  font-family: 'Montserrat';
+}
+
+.recipe-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-info-name {
+  font-size: 50px;
+}
+
+.recipe-info-macros-container {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  align-items: space-between;
+}
+
+.regular-serving-macros {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  background-color: lightblue;
+  margin: 1rem;
+}
+
+.single-serving-macros {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  background-color: lightpink;
+  margin: 1rem;
 }

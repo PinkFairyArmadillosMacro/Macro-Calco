@@ -30,7 +30,7 @@ const Login = ({setLogged, isLogged}) => {
         <form id="form-container">
           <input placeholder="Username" className="input-tag" name='username' autoComplete="off" onChange={usernameChange}></input>
           <input placeholder="Password" className="input-tag" name='password' type='password' onChange={passwordChange}></input>
-          <button id="login-button" type='button' onClick={handleSubmit}>Login</button>
+          <button id="login-button" type='submit' onClick={handleSubmit}>Login</button>
         </form>
         {isLogged && (<Navigate to='/new_user'/>)}
       </div>

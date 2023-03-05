@@ -10,7 +10,7 @@ import SavedRecipes from './SavedRecipes.jsx'
 import SetUp from "./SetUp.jsx";
 
 const App = () => {
-  const [isLogged, setIsLogged] = useState(true)
+  const [isLogged, setIsLogged] = useState(false)
   return(
     <div>
       {isLogged?
