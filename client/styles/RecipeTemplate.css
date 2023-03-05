@@ -52,4 +52,15 @@
 
 .recipe-delete-btn {
   font-family: var(--main-font);
+  padding: 10px 10px;
+  margin: 5px 10px;
+  max-width: 100px;
+  border: none;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+}
+
+.recipe-delete-btn:active {
+  box-shadow: 2px 2px 5px gray;
 }

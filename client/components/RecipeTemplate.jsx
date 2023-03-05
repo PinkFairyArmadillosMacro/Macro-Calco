@@ -10,7 +10,7 @@ const RecipeTemplate = () => {
 
   return (
     <div className="recipe-template">
-      <div className="recipe-image" onClick={redirectToInfoPage}>IMAGE</div>
+      <img src='' alt='IMAGE' className="recipe-image" onClick={redirectToInfoPage}  />
       <div className="recipe-info">
         <p className="recipe-info-name"> Name </p>
         <div className="recipe-info-macros-container">

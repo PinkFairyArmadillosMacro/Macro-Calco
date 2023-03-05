@@ -3,7 +3,7 @@ RECIPE COLLECTION ITEM
 *****************/
 
 .recipe-collection-item {
-  background-color: white;
+  background-color: var(--background-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -56,9 +56,22 @@ RECIPE COLLECTION ITEM
   max-width: 100px;
   border: none;
   border-radius: 5px;
-  background-color: #3498db;
+  /* background-color: red; */
   color: white;
   cursor: pointer;
   font-family: var(--main-font);
   font-size: 0.75rem;
+}
+
+.recipe-collection-item-see-recipe-btn {
+  background-color: var(--tertiary-color);
+}
+
+.recipe-collection-item-delete-btn {
+  background-color: red;
+  border: black;
+}
+
+.recipe-collection-item-delete-btn:active {
+  box-shadow: 2px 2px 5px gray;
 }

@@ -3,14 +3,11 @@ RECIPE COLLECTION
 *****************/
 
 .recipe-collection-container {
-  background-color: lightblue;
+  background-color: var(--secondary-color);
   padding: 1.5rem;
   width: 40%;
   font-family: var(--main-font);
-}
-
-.collection-totals {
-  width: 70%;
+  border: 1px solid black;
 }
 
 .collection-total-macros {
@@ -31,4 +28,9 @@ RECIPE COLLECTION
   display: flex;
   justify-content: space-between;
   margin-bottom: 0px;
+}
+
+.collection-totals {
+  width: 70%;
+  background-color: var(--secondary-color);
 }
