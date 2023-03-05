@@ -1,8 +1,8 @@
 :root {
-  --primary-color: #9DC08B;
+  --primary-color: #9dc08b;
   --secondary-color: #609966;
-  --tertiary-color: #40513B;
-  --background-color: #EDF1D6;
+  --tertiary-color: #40513b;
+  --background-color: #edf1d6;
 }
 
 * {
@@ -11,7 +11,7 @@
   padding: 0;
 }
 
-body{
+body {
   background-color: var(--background-color);
   margin: 0;
 }
@@ -55,7 +55,7 @@ nav h1 {
   LOGIN            
 *****************/
 
-#login-component-container{
+#login-component-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +63,7 @@ nav h1 {
   width: 100%;
 }
 
-#login-container{
+#login-container {
   font-family: 'Montserrat';
   display: flex;
   flex-direction: column;
@@ -75,18 +75,18 @@ nav h1 {
   border-radius: 10px;
 }
 
-#form-container{
+#form-container {
   margin-top: 4rem;
   display: flex;
   flex-direction: column;
   width: 60%;
 }
 
-#login-title{
+#login-title {
   margin: 0;
 }
 
-.input-tag{
+.input-tag {
   margin: 1rem 0;
 }
 
@@ -94,31 +94,29 @@ nav h1 {
  SET UP MACROS              
 *****************/
 
-#macro-setup-container{
+#macro-setup-container {
   display: flex;
   justify-content: center;
   margin-top: 5rem;
 }
 
-#macro-setup-form-container{
+#macro-setup-form-container {
   font-family: 'Montserrat';
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#macro-form-container{
-
+#macro-form-container {
   display: flex;
   flex-direction: column;
   width: 400px;
 }
 
-#macros-subtext{
+#macros-subtext {
   opacity: 50%;
-  margin: 1rem 0 ;
+  margin: 1rem 0;
 }
-
 
 /**************** 
  RECIPE TEMPLATE               
@@ -135,7 +133,7 @@ nav h1 {
 }
 
 .recipe-image {
-  
+  font-size: 50px;
 }
 
 .recipe-info {
@@ -150,24 +148,43 @@ nav h1 {
 }
 
 .recipe-info-macros-container {
-  display: flex;
-  flex-direction: row;
-  /* align-items: center; */
-  align-items: space-between;
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  margin: 1rem;
+  /* flex-direction: row;
+   align-items: center; 
+  align-items: space-between; */
 }
 
-.regular-serving-macros {
+/* .recipe-macros {
   display: flex;
   flex-direction: column;
   text-align: right;
   background-color: lightblue;
   margin: 1rem;
+} */
+
+.serving-macros-title,
+.macros-count-title,
+.recipe-info-macros-amount,
+.recipe-info-macros-count {
+  font-size: 10px;
+  border: solid 1px black;
+  text-align: center;
 }
 
-.single-serving-macros {
+.macros-summary,
+.macros-count-label {
+  font-size: 15px;
+  border: solid 1px black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* .single-serving-macros {
   display: flex;
   flex-direction: column;
   text-align: right;
   background-color: lightpink;
   margin: 1rem;
-}
+} */
