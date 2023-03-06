@@ -23,26 +23,33 @@ const userController = {};
 /**
  * createUser - create and save a new User into the database.
  */
+
 userController.createUser = async (req, res, next) => {
   //TODO: hash password
-  const { username, password } = req.body
+  const { username, password, calorieGoal, proteinGoal, carbGoal, fatGoal } = req.body
   if(await User.exists({ username })) {
     console.log('that user name exists!')
   }
   else{
-    models.User.create({ username, password }, (err, user) => {
+    models.User.create({ username, password, calorieGoal, proteinGoal, carbGoal, fatGoal }, (err, user) => {
       if (err) {
         return next({message: {err: 'error in createUser!'}});
       }
-      res.locals.data = user;
+      // res.locals.data = user;
       return next();
     })
     };
   }
 
-  userController.assignMacros = (req,res,next) => {
-    const {carbs, protein, fats} = req.body;
-    
+  // user request to update macro ratio
+  userController.updateMacros = async (req, res, next) => {
+    const { username, calorieGoal, proteinGoal, carbGoal, fatGoal} = req.body;
+      await User.updateOne({ username }, { calorieGoal, proteinGoal, carbGoal, fatGoal }, (err, user) => {
+        if (err) {
+          return next({message: {err: 'error in updateMacros!'}});
+        }
+        return next();
+      })
   }
 
 // /**

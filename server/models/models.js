@@ -1,11 +1,21 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const MONGO_URI = 'mongodb+srv://backend:<iq4eJA8jSxukbiI4>@macrocluster.0gmu3hj.mongodb.net/?retryWrites=true&w=majority' 
+
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  usuUnifiedTopology: true,
+  dbName: 'Macro-Calco'
+})
+  .then(() => console.log('Connected to Mongo DB.'));
+
 const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   // collection : [{recipe1, recipe2, recipe3}, {recipe1,recipe2,recipe3}]
   collections: [{ type: Schema.Types.ObjectId, ref: "collection" }],
+  calorieGoal: { type: Number, required: true},
   proteinGoal: { type: Number, required: true },
   carbGoal: { type: Number, required: true },
   fatGoal: { type: Number, required: true },
