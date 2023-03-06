@@ -18,7 +18,7 @@ const PORT = 3000;
 
 app.use("/build", express.static(path.join(__dirname, "../build")));
 // serve index.html on the route '/'
-app.get("/", (req, res) => {
+app.get("/", cookieController.setCookie, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
@@ -26,26 +26,28 @@ app.get("/signup", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/signup.html"));
 });
 
-app.post(
-  "/signup",
-  userController.createUser,
-  // cookieController.setSSIDCookie,
-  // sessionController.startSession,
-  (req, res) => {
-    // what should happen here on successful sign up?
-    res.redirect("/homepage");
-  }
-);
+app.post("/login", userController.verifyUser, (req, res) => {
+  
+});
+
+app.post("/signup", userController.createUser, (req, res) => {
+  res.redirect("/homepage");
+});
+
+app.get("/findRecipes", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/find.html"));
+});
+
+app.post("/findRecipes", recipeController.sortRecipes, (req, res) => {
+  res.status(200).json(res.locals.recipes);
+});
 
 app.post(
   "/collection",
   recipeController.saveRecipes,
   collectionController.createCollection,
-  // cookieController.setSSIDCookie,
-  // sessionController.startSession,
   (req, res) => {
-    // what should happen here on successful sign up?
-    res.redirect("/homepage");
+    res.status(200).send("collection created successfully!");
   }
 );
 
@@ -57,13 +59,9 @@ app.delete("/recipe", recipeController.deleteRecipe, (req, res) => {
   res.status(200).send("recipe deleted successfully!");
 });
 
-app.patch("/macros", userController.updateMacros, (req, res) => {
+app.patch("/user", userController.updateMacros, (req, res) => {
   res.status(200).send("Macro goal updated successfully!");
 });
-
-// app.get('/', cookieController.setCookie, (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../client/index.html'));
-// });
 
 // /**
 // * login
