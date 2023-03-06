@@ -39,7 +39,6 @@ const MyAccount = (props) => {
           </p>
           <button id="login-button" type='button' onClick={handleUpdateMacros}>Submit</button>
         </form>
-        {isSetUp && (<Navigate to='/home'/>)}
       </div>
     </div>
   )

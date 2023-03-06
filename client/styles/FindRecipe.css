@@ -10,6 +10,10 @@
   margin: 1rem;
 }
 
+#find-recipe-header{
+  font-family: 'Montserrat';
+}
+
 .refine-search-form {
   display: flex;
   border-radius: 5px;
@@ -48,7 +52,7 @@
   width: 70%;
   flex-wrap: wrap;
   overflow-y: scroll;
-  max-height: 1000px;
+  max-height: 100vh;
   /* flex: 2; */
 }
 
@@ -58,4 +62,16 @@
 
 .current-recipe-collection {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#current-recipe-name-form{
+  font-family: 'Montserrat';
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 50%;
+  height: 100px;
 }

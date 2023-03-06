@@ -5,13 +5,38 @@ const RecipeCollectionItem = (props) => {
 
 
 
-  const { deleteRecipeCollectionItem } = props;
-
+  const { deleteRecipeCollectionItem, collection, setCurrentCollection, location} = props;
+  const {totalMacros} = collection
   const {name, servingSize, cals, protein, carbs, fat, url, id} = props;
+
+  const handleDeleteItem = (e) => { 
+    //if were deleting a recipe from our collection in FindRecipe
+    if(location ==='findRecipe'){
+      for(let recipeInd in collection.recipes){
+        if(collection.recipes[recipeInd].name === name){
+          const newRecipes = collection.recipes;
+          newRecipes.splice(recipeInd, 1)
+          console.log(newRecipes)
+          setCurrentCollection({
+            totalMacros:{
+              carbs: totalMacros.carbs - (Math.floor(carbs/servingSize)* servingSize),
+              fat: totalMacros.fat - (Math.floor(fat/servingSize) * servingSize),
+              protein: totalMacros.protein -  (Math.floor(protein/servingSize) * servingSize),
+              cals: totalMacros.cals -  (Math.floor(cals/servingSize) * servingSize)
+            },
+            recipes: newRecipes,
+            totalRecipes: collection.totalRecipes - 1
+          })
+          console.log(collection)
+        }
+      }
+    }
+  }
+
   return (
     <div className='recipe-collection-item-container'>
       <div className="recipe-collection-item-buttons">
-        <button onClick={deleteRecipeCollectionItem} className='recipe-collection-item-delete-btn'>
+        <button onClick={handleDeleteItem} className='recipe-collection-item-delete-btn'>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
               <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
           </svg>

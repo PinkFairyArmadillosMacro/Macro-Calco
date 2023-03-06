@@ -12,7 +12,7 @@ RECIPE COLLECTION
   margin: 1rem;
   border-radius: 15px;
   position: relative;
-  height: 630px
+  height: 650px
 }
 
 /* .collection-totals {
@@ -44,6 +44,10 @@ RECIPE COLLECTION
   width: 100%;
   margin-bottom: 1rem;
   /* justify-content: space-between; */
+}
+
+.collection-name {
+  font-size: 1.5rem;
 }
 
 .recipe-collection-table-row {

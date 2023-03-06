@@ -22,7 +22,7 @@ const RecipeTemplate = (props) => {
         cals: totalMacros.cals +  (Math.floor(cal/noOfServings)* desiredServings)
       },
       totalRecipes: totalRecipes + 1,
-      recipes: recipes.concat({name, noOfServings, cal, protein, carbs, fat})
+      recipes: recipes.concat({name, noOfServings:desiredServings, cal: (Math.floor(cal/noOfServings)* desiredServings), protein: (Math.floor(protein/noOfServings)* desiredServings), carbs:(Math.floor(carbs/noOfServings)* desiredServings), fat: (Math.floor(carbs/noOfServings)* desiredServings)})
     })
     console.log(currentCollection)
   }

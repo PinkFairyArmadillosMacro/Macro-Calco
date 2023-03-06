@@ -8,19 +8,10 @@ import RecipeCollection from './RecipeCollection.jsx';
 const FindRecipe = (props) => {
 
   const [searchQuery, setSearchQuery] = useState('');
-
-  const handleQueryChange = (e) => {
-    const { value } = e.target;
-    setSearchQuery(value);
-  }
-
-  const handleQuerySubmit = (e) => {
-    e.preventDefault();
-    // TODO: SEND GET REQUEST TO BACKEND
-  }
-
+  const [collectionName, setCollectionName] = useState('')
   const [currentCollection, setCurrentCollection] = useState(
-    { totalMacros: {
+    { name: '',
+      totalMacros: {
         carbs: 0,
         fat: 0,
         protein: 0,
@@ -75,16 +66,27 @@ const FindRecipe = (props) => {
       cal:860,
       protein: 50,
       carbs: 18,
-      fat: 20,
+      fat: 13,
       imageURL: ''
     },
   ]
-  const addToCollection = () => {
 
+  const onNameChange = (e) => {setCollectionName(e.target.value)}
+
+  const handleQueryChange = (e) => {
+    const { value } = e.target;
+    setSearchQuery(value);
   }
 
-  const addToUserCollections = () => {
+  const handleQuerySubmit = (e) => {
+    e.preventDefault();
+    // TODO: SEND GET REQUEST TO BACKEND
+  }
 
+  const handleCollectionSubmit = (e) =>{
+    e.preventDefault();
+    setCurrentCollection({...currentCollection, name: collectionName})
+    console.log(currentCollection)
   }
 
   const recipeSelection = dummyRecipes.map((recipe) => (
@@ -93,7 +95,7 @@ const FindRecipe = (props) => {
 
   return (
       <div className='find-recipe-container'>
-        <h1>Create a new Collection</h1>
+        <h1 id='find-recipe-header'>Create a new Collection</h1>
         <div id='refine-search-form-container'>
           <form onSubmit={handleQuerySubmit} className='refine-search-form'>
             <input 
@@ -117,7 +119,12 @@ const FindRecipe = (props) => {
             {recipeSelection}
           </div>
           <div className='current-recipe-collection'>
-            <RecipeCollection addToUserCollections={addToUserCollections} collection={currentCollection} />  
+            <RecipeCollection collection={currentCollection} setCurrentCollection={setCurrentCollection} location='findRecipe'/>  
+            <form id='current-recipe-name-form'>
+              <p>Enter Collection Name</p>
+              <input placeholder='(Ex: My Collection 1)'></input>
+              <button onClick={handleCollectionSubmit}>Add to My Collections</button>
+            </form>
           </div>
         </div>
 

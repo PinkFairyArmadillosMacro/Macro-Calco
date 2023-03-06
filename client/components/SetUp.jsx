@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Navigate } from "react-router";
 
-const SetUp = () => {
+const SetUp = (props) => {
 
   const [calories,setCalories] = useState(0)
   const [carbs, setCarbs] = useState(0)
@@ -19,6 +19,7 @@ const SetUp = () => {
     e.preventDefault();
     console.log(calories, carbs, proteins, fats)
     setIsSetUp(true)
+    props.setLogged(true);
   }
 
   return (
