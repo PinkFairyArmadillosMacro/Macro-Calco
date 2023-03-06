@@ -8,12 +8,17 @@ import FindRecipe from "./components/FindRecipe.jsx";
 import MyAccount from "./components/MyAccount.jsx";
 import styles from './styles/styles.css';
 import SetUp from "./components/SetUp.jsx";
+import Signup from "./components/Signup.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: 'signup',
+        element: <Signup/>
+      }, 
       {
         path: 'new_user',
         element: <SetUp/>

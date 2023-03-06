@@ -4,7 +4,42 @@
 
 .find-recipe-container {
   display: flex;
+  flex-direction: column;
   width: 100%;
+  /* padding: 1em; */
+  margin: 1rem;
+}
+
+.refine-search-form {
+  display: flex;
+  border-radius: 5px;
+}
+
+.find-recipe-search {
+  text-indent: 0.5rem;
+  height: 25px;
+  width: 65%;
+  text-align: left;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 1px black solid;
+  border-left: none;
+  border: none;
+  /* margin: 1rem 0; */
+}
+
+.submit-recipe-search-btn {
+  width: 2.5em;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px black solid;
+  border-left: none;
+  border: none;
+}
+
+#recipes-and-total-container{
+  display: flex;
+  flex-direction: row;
 }
 
 .recipe-selection {
@@ -12,8 +47,13 @@
   flex-direction: row;
   width: 70%;
   flex-wrap: wrap;
-
+  overflow-y: scroll;
+  max-height: 1000px;
   /* flex: 2; */
+}
+
+.recipe-selection::-webkit-scrollbar {
+  background: transparent;
 }
 
 .current-recipe-collection {

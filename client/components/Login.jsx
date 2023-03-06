@@ -7,6 +7,7 @@ const Login = ({setLogged, isLogged}) => {
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
   //const [isLogged, setIsLogged] = useState(false);
+  const [userExists, setUserExists] = useState(false);
 
   const usernameChange = (e) => { setUsername(e.target.value) }
 
@@ -33,7 +34,13 @@ const Login = ({setLogged, isLogged}) => {
           <input placeholder="Password" className="input-tag" name='password' type='password' onChange={passwordChange}></input>
           <button id="login-button" type='submit' onClick={handleSubmit}>Login</button>
         </form>
-        {isLogged && (<Navigate to='/new_user'/>)}
+
+        <p>New User?</p>
+        <Link to='signup'>
+          <a>Sign up!</a> 
+        </Link>
+        
+        {isLogged && (<Navigate to='/home'/>)}
       </div>
 
     </div>

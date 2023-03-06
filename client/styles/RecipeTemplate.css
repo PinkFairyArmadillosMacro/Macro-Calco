@@ -8,8 +8,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 450px;
-  width: 350px;
+  height: 575px;
+  width: 275px;
   font-family: var(--main-font);
   margin: 1rem 1rem;
   border-radius: 10px;
@@ -80,12 +80,12 @@
 
 
 #nutrition-facts-container{
-  font-size: .5rem;
+  font-size: .55rem;
   font-family: 'Helvetica';
   display: flex;
   flex-direction: column;
-  width: 175px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   border: 1px solid black;
   padding: 5px;
   background-color: white;
@@ -150,7 +150,7 @@
 MACROS CONTAINER           
 *****************/
 #template-macros-container{
-  margin-top: -.5rem;
+  margin-top: .5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -160,6 +160,7 @@ MACROS CONTAINER
 
 .pie-chart-text{
   font-size: 11rem;
+  margin: -1.5rem 0;
 }
 
 #macros-and-chart-container{
@@ -170,15 +171,27 @@ MACROS CONTAINER
   width: 100%;
 }
 
+#desired-serving-form{
+  margin-top: 5px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+#desired-serving-label{
+  font-size: .7rem;
+}
+
 .recipe-crud-buttons{
   display: flex;
   width: 80%;
   justify-content: flex-end;
   position: absolute;
-  top: 15;
+  bottom: 15;
   right: 15;
 }
 
-.recipe-crud-buttons:hover {
+.add-button:hover {
   cursor: pointer;
 }

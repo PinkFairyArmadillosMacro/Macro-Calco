@@ -4,7 +4,16 @@ import RecipeTemplate from './RecipeTemplate.jsx';
 import RecipeCollectionItem from './RecipeCollectionItem.jsx';
 
 const RecipeCollection = (props) => {
+
+  // const [currCollection, setCurrentCollection] = useState(props.collection);
+
+  const deleteRecipeCollectionItem = (e) => {
+    
+  }
+
   const collection = props.collection
+
+  let num = 0;
   const recipeCollectionItems = collection.recipes.map((recipe) => {
     return (
       <RecipeCollectionItem 
@@ -15,6 +24,7 @@ const RecipeCollection = (props) => {
         carbs = {recipe.carbs}
         fat = {recipe.fat}
         url = {recipe.imageURL}
+        id = {num++}
       />
     )
   })
@@ -25,24 +35,20 @@ const RecipeCollection = (props) => {
         <div className="collection-total-macros">
         <div className="recipe-collection-table">
             <div className="recipe-collection-table-row">
-              <p>Serving Size</p>
-              <p>1</p>
-            </div>
-            <div className="recipe-collection-table-row">
               <p>Carbs</p>
-              <p>50g</p>
+              <p>{collection.totalMacros.carbs}g</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>Fat</p>
-              <p>50g</p>
+              <p>{collection.totalMacros.fat}g</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>Protein</p>
-              <p>50g</p>
+              <p>{collection.totalMacros.protein}g</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>kcal</p>
-              <p>50</p>
+              <p>{collection.totalMacros.cals}</p>
             </div>
           </div>
         </div>
