@@ -21,34 +21,41 @@ const RecipeCollection = (props) => {
   return (
     <div className='recipe-collection-container'>
       <div className="collection-totals">
-        <p> Total Macros: </p>
+        <p className='collection-totals-label'> Total Macros: </p>
         <div className="collection-total-macros">
-          <div className="recipe-collection-table">
+        <div className="recipe-collection-table">
             <div className="recipe-collection-table-row">
               <p>Serving Size</p>
               <p>1</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>Carbs</p>
-              <p>{props.collection.totalMacros.carbs}g</p>
+              <p>50g</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>Fat</p>
-              <p>{collection.totalMacros.fat}g</p>
+              <p>50g</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>Protein</p>
-              <p>{collection.totalMacros.protein}g</p>
+              <p>50g</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>kcal</p>
-              <p>{collection.totalMacros.cals}</p>
+              <p>50</p>
             </div>
           </div>
         </div>
-        <p> Total Recipes: {collection.totalRecipes} </p>
+        <p className='collection-totals-label'> Total Recipes: {collection.totalRecipes} </p>
       </div>
-      {recipeCollectionItems}
+      <div className='collection-scroll'>
+        {recipeCollectionItems}
+      </div>
+      <div className="recipe-collection-buttons">
+        <button className='recipe-collection-delete-btn'>
+          Delete Collection
+        </button>
+      </div>
     </div>
   );
 };

@@ -83,6 +83,9 @@ const FindRecipe = (props) => {
 
   return (
       <div className='find-recipe-container'>
+        <form>
+          <input></input>
+        </form>
         <div className='recipe-selection'>
           {recipeSelection}
         </div>

@@ -35,14 +35,7 @@ const Login = ({setLogged, isLogged}) => {
         </form>
         {isLogged && (<Navigate to='/new_user'/>)}
       </div>
-      {/* <div id="nutrition-facts-container">
-        <h1 id="nutrition-facts-title">Nutrition Facts</h1>
-        <div id="nutrition-serving-size-container">
-          <p></p>
 
-        </div>
-
-      </div> */}
     </div>
   )
 }

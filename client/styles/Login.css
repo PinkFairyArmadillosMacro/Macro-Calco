@@ -44,19 +44,3 @@
   margin: 1rem 0;
   text-indent: 0.3rem;
 }
-
-
-#nutrition-facts-container{
-  font-family: 'Helvetica';
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  height: 400px;
-  border: 1px solid black;
-}
-
-#nutrition-facts-title{
-  font-weight: 800;
-  border-bottom: 1px solid black;
-  margin: 0 4px;
-}

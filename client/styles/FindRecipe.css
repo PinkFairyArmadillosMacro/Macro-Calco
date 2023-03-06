@@ -5,12 +5,14 @@
 .find-recipe-container {
   display: flex;
   width: 100%;
-  background-color: red;
 }
 
 .recipe-selection {
   display: flex;
-  background-color: red;
+  flex-direction: row;
+  width: 70%;
+  flex-wrap: wrap;
+
   /* flex: 2; */
 }
 

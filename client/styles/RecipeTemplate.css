@@ -2,14 +2,23 @@
  RECIPE TEMPLATE               
 *****************/
 
-.recipe-template {
-  background-color: white;
+.recipe-template-container {
+  background-color: #9DC08B;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20%;
+  height: 450px;
+  width: 350px;
   font-family: var(--main-font);
+  margin: 1rem 1rem;
+  border-radius: 10px;
+
+  position: relative;
+}
+
+#recipe-template-title{
+  margin: 1rem 0;
 }
 
 .recipe-image {
@@ -63,4 +72,113 @@
 
 .recipe-delete-btn:active {
   box-shadow: 2px 2px 5px gray;
+}
+
+/**************** 
+ NUTRITION FACTS BOX             
+*****************/
+
+
+#nutrition-facts-container{
+  font-size: .5rem;
+  font-family: 'Helvetica';
+  display: flex;
+  flex-direction: column;
+  width: 175px;
+  height: 150px;
+  border: 1px solid black;
+  padding: 5px;
+  background-color: white;
+}
+
+#nutrition-serving-size-container{
+  margin-top: 2px;
+  border-bottom: 4px solid black;
+}
+
+#nutrition-facts-title{
+  font-weight: 800;
+  border-bottom: 1px solid black;
+}
+
+#nutrition-single-serving-title-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#nutrition-facts-columns-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#nutrition-column-calories-header{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+#nutrition-column-one, #nutrition-column-two{
+  border-right: 1px solid black;
+}
+
+#nutrition-column-one, #nutrition-column-two, #nutrition-column-three{
+  padding: 0 3px;
+}
+
+.nutrition-column-header{
+  text-align: right;
+}
+
+.nutrition-column-header, #nutrition-column-calories-header{
+  border-bottom: 2px solid black;
+}
+
+.nutrition-facts-label{
+  border-bottom: 1px solid black;
+  font-size: .8rem;
+}
+
+.nutrition-facts-label-container{
+  border-bottom: 2px solid black;
+}
+.single-serv-label, .recipe-serv-label{
+  text-align: right;
+}
+
+/**************** 
+MACROS CONTAINER           
+*****************/
+#template-macros-container{
+  margin-top: -.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.pie-chart-text{
+  font-size: 11rem;
+}
+
+#macros-and-chart-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.recipe-crud-buttons{
+  display: flex;
+  width: 80%;
+  justify-content: flex-end;
+  position: absolute;
+  top: 15;
+  right: 15;
+}
+
+.recipe-crud-buttons:hover {
+  cursor: pointer;
 }

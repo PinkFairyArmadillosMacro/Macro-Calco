@@ -42,19 +42,29 @@ const Home = () => {
           fat: 20,
           imageURL: ''
         },
+        {
+          name: 'Blueberry Pancakes',
+          noOfServings: 2,
+          cal:860,
+          protein: 50,
+          carbs: 18,
+          fat: 20,
+          imageURL: ''
+        },
       ]
     }
     return (
         <div>
           <h1>Saved Collections</h1>
           <div id='collection-containers'>
-
+            <RecipeCollection collection={recipeCollection}/>
+            <RecipeCollection collection={recipeCollection}/>
+            <RecipeCollection collection={recipeCollection}/>
+            <RecipeCollection collection={recipeCollection}/>
+            <RecipeCollection collection={recipeCollection}/>
+            <RecipeCollection collection={recipeCollection}/>
+            <RecipeCollection collection={recipeCollection}/>
           </div>
-          <RecipeCollection collection={recipeCollection}/>
-          <RecipeCollection collection={recipeCollection}/>
-          <RecipeCollection collection={recipeCollection}/>
-          <RecipeCollection collection={recipeCollection}/>
-
         </div>
     )
 }
