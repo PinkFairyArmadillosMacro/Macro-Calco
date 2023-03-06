@@ -49,7 +49,7 @@ recipeController.saveRecipes = async (req, res, next) => {
   return next();
 };
 
-  recipeController.deleteRecipe = (req, req, next) => {
+  recipeController.deleteRecipe = (req, res, next) => {
 
   }
 
