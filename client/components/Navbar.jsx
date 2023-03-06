@@ -3,27 +3,27 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <nav>
-            <ul>
+        <header>
+            <div>
                 <h1>
                     Macro Calco
                 </h1>
-            </ul>
-            <ul className='nav-links'>
-                <Link to='/'>
+            </div>
+            <nav className='nav-links'>
+                <Link to='home'>
                     <a>Home</a>
                 </Link>
-                <Link to='/findrecipe'>
+                <Link to='find'>
                     <a>Find Recipe</a>
                 </Link>
-                <Link to='/savedrecipes'>
-                    <a>Saved Recipes</a>
+                <Link to='myaccount'>
+                    <a>My Account</a>
                 </Link>
-                <Link to='/logout'>
+                <Link to='logout'>
                     <button>Logout</button>
                 </Link>
-            </ul>
-        </nav>
+            </nav>
+        </header>
     )
 }
 

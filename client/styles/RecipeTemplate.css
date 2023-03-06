@@ -1,0 +1,197 @@
+/**************** 
+ RECIPE TEMPLATE               
+*****************/
+
+.recipe-template-container {
+  background-color: #9DC08B;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 575px;
+  width: 275px;
+  font-family: var(--main-font);
+  margin: 1rem 1rem;
+  border-radius: 10px;
+
+  position: relative;
+}
+
+#recipe-template-title{
+  margin: 1rem 0;
+}
+
+.recipe-image {
+  font-size: 1rem;
+}
+
+.recipe-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-info-name {
+  font-size: 1.5rem;
+}
+
+.recipe-info-macros-container {
+  font-size: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 10em);
+  margin: 1em;
+}
+
+.serving-macros-title,
+.macros-count-title,
+.recipe-info-macros-amount,
+.recipe-info-macros-count {
+  border: solid 1px black;
+  text-align: center;
+}
+
+.macros-summary,
+.macros-count-label {
+  font-size: 0.5rem;
+  border: solid 1px black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.recipe-delete-btn {
+  font-family: var(--main-font);
+  padding: 10px 10px;
+  margin: 5px 10px;
+  max-width: 100px;
+  border: none;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+}
+
+.recipe-delete-btn:active {
+  box-shadow: 2px 2px 5px gray;
+}
+
+/**************** 
+ NUTRITION FACTS BOX             
+*****************/
+
+
+#nutrition-facts-container{
+  font-size: .55rem;
+  font-family: 'Helvetica';
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  padding: 5px;
+  background-color: white;
+}
+
+#nutrition-serving-size-container{
+  margin-top: 2px;
+  border-bottom: 4px solid black;
+}
+
+#nutrition-facts-title{
+  font-weight: 800;
+  border-bottom: 1px solid black;
+}
+
+#nutrition-single-serving-title-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#nutrition-facts-columns-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#nutrition-column-calories-header{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+#nutrition-column-one, #nutrition-column-two{
+  border-right: 1px solid black;
+}
+
+#nutrition-column-one, #nutrition-column-two, #nutrition-column-three{
+  padding: 0 3px;
+}
+
+.nutrition-column-header{
+  text-align: right;
+}
+
+.nutrition-column-header, #nutrition-column-calories-header{
+  border-bottom: 2px solid black;
+}
+
+.nutrition-facts-label{
+  border-bottom: 1px solid black;
+  font-size: .8rem;
+}
+
+.nutrition-facts-label-container{
+  border-bottom: 2px solid black;
+}
+.single-serv-label, .recipe-serv-label{
+  text-align: right;
+}
+
+/**************** 
+MACROS CONTAINER           
+*****************/
+#template-macros-container{
+  margin-top: .5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.pie-chart-text{
+  font-size: 11rem;
+  margin: -1.5rem 0;
+}
+
+#macros-and-chart-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+#desired-serving-form{
+  margin-top: 5px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+#desired-serving-label{
+  font-size: .7rem;
+}
+
+.recipe-crud-buttons{
+  display: flex;
+  width: 80%;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 15;
+  right: 15;
+}
+
+.add-button:hover {
+  cursor: pointer;
+}

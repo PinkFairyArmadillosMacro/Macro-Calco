@@ -1,0 +1,107 @@
+/**************** 
+RECIPE COLLECTION
+*****************/
+
+.recipe-collection-container {
+  background-color: var(--secondary-color);
+  padding: 1rem;
+  /* width: 22%; */
+  font-family: var(--main-font);
+  border: 1px solid black;
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 15px;
+  position: relative;
+  height: 650px
+}
+
+/* .collection-totals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+} */
+
+.collection-totals-label {
+  margin-bottom: 1rem;
+}
+
+.collection-total-macros {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-left: 2rem;
+}
+
+.recipe-collection-table {
+  /* display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  justify-content: center;
+  width: 50%; */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+  /* justify-content: space-between; */
+}
+
+.collection-name {
+  font-size: 1.5rem;
+}
+
+.recipe-collection-table-row {
+  /* display: flex;
+  justify-content: space-between;
+  margin-bottom: 0px; */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.collection-totals {
+  width: 70%;
+  background-color: var(--secondary-color);
+}
+
+.recipe-collection-buttons {
+  /* position: absolute;
+  top: 0;
+  right: 0; */
+  /* align-items: flex-end; */
+  margin-top: 1rem;
+  position: absolute;
+  bottom: 7;
+  right: 7;
+}
+
+.recipe-collection-buttons button {
+  padding: 0.5em;
+  margin: 0px 0.25em;
+  max-width: 100px;
+  border: none;
+  border-radius: 5px;
+  /* background-color: red; */
+  color: white;
+  cursor: pointer;
+  font-family: var(--main-font);
+  font-size: 0.6rem;
+}
+
+.recipe-collection-delete-btn {
+  background-color: red;
+}
+
+.recipe-collection-delete-btn:active {
+  box-shadow: 2px 2px 5px gray;
+}
+
+.collection-scroll {
+  overflow-y: scroll;
+  max-height: 400px;
+  border-radius: 5px;
+}
+
+.collection-scroll::-webkit-scrollbar {
+  background: transparent;
+}
