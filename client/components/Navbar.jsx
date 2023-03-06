@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <nav>
-            <ul>
+        <header>
+            <div>
                 <h1>
                     Macro Calco
                 </h1>
-            </ul>
-            <ul className='nav-links'>
+            </div>
+            <nav className='nav-links'>
                 <Link to='home'>
                     <a>Home</a>
                 </Link>
@@ -22,8 +22,8 @@ const Navbar = () => {
                 <Link to='logout'>
                     <button>Logout</button>
                 </Link>
-            </ul>
-        </nav>
+            </nav>
+        </header>
     )
 }
 

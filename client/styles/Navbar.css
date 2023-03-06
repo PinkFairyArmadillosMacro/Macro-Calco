@@ -2,7 +2,7 @@
  NAVBAR               
 *****************/
 
-nav {
+header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,7 +11,7 @@ nav {
   font-family: var(--main-font);
 }
 
-nav h1 {
+header div h1 {
   margin-left: 2rem;
 }
 

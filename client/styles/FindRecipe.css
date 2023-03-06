@@ -1,0 +1,19 @@
+/**************** 
+ RECIPE COLLECTION               
+*****************/
+
+.find-recipe-container {
+  display: flex;
+  width: 100%;
+  background-color: red;
+}
+
+.recipe-selection {
+  display: flex;
+  background-color: red;
+  /* flex: 2; */
+}
+
+.current-recipe-collection {
+  flex: 1;
+}

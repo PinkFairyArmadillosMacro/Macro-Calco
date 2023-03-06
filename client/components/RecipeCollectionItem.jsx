@@ -1,33 +1,34 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-const RecipeCollectionItem = () => {
+const RecipeCollectionItem = (props) => {
 
+  const {name, servingSize, cals, protein, carbs, fat, url} = props;
   return (
     <div className="recipe-collection-item">
       <img src="" alt="Recipe Image" />
       <div className="recipe-collection-item-macros">
-        <h2>Recipe Name</h2>
+        <h2>{name}</h2>
         <div className="recipe-collection-item-table">
           <div className="recipe-collection-item-table-row">
             <p>Serving Size</p>
-            <p>1</p>
+            <p>{servingSize}</p>
           </div>
           <div className="recipe-collection-item-table-row">
             <p>Carbs</p>
-            <p>10g</p>
+            <p>{carbs}g</p>
           </div>
           <div className="recipe-collection-item-table-row">
             <p>Fat</p>
-            <p>5g</p>
+            <p>{fat}g</p>
           </div>
           <div className="recipe-collection-item-table-row">
             <p>Protein</p>
-            <p>20g</p>
+            <p>{protein}g</p>
           </div>
           <div className="recipe-collection-item-table-row">
             <p>kcal</p>
-            <p>200</p>
+            <p>{cals}</p>
           </div>
         </div>
       </div>

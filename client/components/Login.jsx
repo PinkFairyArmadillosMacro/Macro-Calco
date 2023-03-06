@@ -25,6 +25,7 @@ const Login = ({setLogged, isLogged}) => {
 
   return(
     <div id="login-component-container">
+      <h1 id="main-login-title">Macro Calco</h1>
       <div id="login-container">
         <h1 id="login-title">Log In:</h1>
         <form id="form-container">
@@ -34,6 +35,14 @@ const Login = ({setLogged, isLogged}) => {
         </form>
         {isLogged && (<Navigate to='/new_user'/>)}
       </div>
+      {/* <div id="nutrition-facts-container">
+        <h1 id="nutrition-facts-title">Nutrition Facts</h1>
+        <div id="nutrition-serving-size-container">
+          <p></p>
+
+        </div>
+
+      </div> */}
     </div>
   )
 }

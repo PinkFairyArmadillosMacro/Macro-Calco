@@ -5,7 +5,6 @@ import App from "./components/App.jsx";
 import Home from "./components/Home.jsx";
 import Login from "./components/Login.jsx";
 import FindRecipe from "./components/FindRecipe.jsx";
-import SavedRecipes from "./components/SavedRecipes.jsx";
 import MyAccount from "./components/MyAccount.jsx";
 import styles from './styles/styles.css';
 import SetUp from "./components/SetUp.jsx";
