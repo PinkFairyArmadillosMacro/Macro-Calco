@@ -10,7 +10,7 @@ const recipeController = {};
 
 // (q: cilantro onions parsley) example URL: https://api.edamam.com/api/recipes/v2?type=public&q=cilantro%20onions%20parsley&app_id=667c1c3a&app_key=0b6b0f12f39b034d2c5f749eaa229bbe&diet=balanced&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients
 
-str.replaceAll(" ", "%20");
+//str.replaceAll(" ", "%20");
 
 const calculateRelevance = (recipeMacros, userMacros) => {
   //recipesMacros, userMacros = [calories, carbs, fat, protein] -> [2000, 125g, 250g, 125g]
@@ -78,6 +78,7 @@ recipeController.sortRecipes = async (req, res, next) => {
   recipes.sort((a, b) => a.relevance - b.relevance);
 
   res.locals.recipes = recipes; // array of recipes sorted based on relevance
+
 };
 
 recipeController.saveRecipes = async (req, res, next) => {
@@ -153,7 +154,7 @@ recipeController.saveRecipes = async (req, res, next) => {
   return next();
 };
 
-recipeController.deleteRecipe = (req, req, next) => {};
+recipeController.deleteRecipe = (req, res, next) => {};
 
 module.exports = recipeController;
 

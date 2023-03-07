@@ -29,4 +29,9 @@ collectionController.deleteCollection = (req, res, next) => {
   Collection.deleteOne({ name: req.body.name });
 };
 
+collectionController.generateSavedCollection = (req, res, next) => {
+  const {username} = res.cookies;
+  return next()
+}
+
 module.exports = collectionController;

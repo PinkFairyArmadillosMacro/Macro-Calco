@@ -1,18 +1,20 @@
 const models = require("../models/models");
-
+const User = models.User;
 const userController = {};
 
 
 userController.createUser = async (req, res, next) => {
-  const { username, password, calorieGoal, proteinGoal, carbGoal, fatGoal } = req.body
+  console.log('this is req.body on signup post request', req.body);
+  const { username, password, calorieGoal, proteinGoal, carbGoal, fatGoal } = req.body;
   if(await User.exists({ username })) {
     console.log('that user name exists!')
   }
   else{
-    models.User.create({ username, password, calorieGoal, proteinGoal, carbGoal, fatGoal }, (err, user) => {
+    await User.create({ username, password, calorieGoal, proteinGoal, carbGoal, fatGoal }, (err, user) => {
       if (err) {
         return next({message: {err: 'error in createUser!'}});
       }
+      res.locals.user = user;
       return next();
     })
     };
@@ -31,13 +33,18 @@ userController.createUser = async (req, res, next) => {
 
   userController.verifyUser = async (req, res, next) => {
     try {
+      console.log('this is verify user', req.body);
       const { username, password } = req.body;
       // `findOne` returns a document/model instances, while
       // `find` returns a query object, which has no access to the methods
       const result = await User.findOne({ username: username }).exec();
       // If the username does not exist, `findOne` returns `null`
-      if (result === null) return res.redirect("/signup");
-      res.cookie('userCookie', username);
+      if (result === null){
+        res.locals.isLogged = false;
+        return next();
+      };
+      res.cookie('username', username);
+      res.locals.isLogged = true;
       // const isMatch = await result.comparePassword(password);
       // This URL is an absolute URL that starts from the root of the domain
       // which is what we want

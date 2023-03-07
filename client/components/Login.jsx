@@ -4,6 +4,7 @@ import { Link, Navigate} from "react-router-dom";
 
 const Login = ({setLogged, isLogged}) => {
   
+
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
   //const [isLogged, setIsLogged] = useState(false);
@@ -21,6 +22,18 @@ const Login = ({setLogged, isLogged}) => {
     // change isLogged true
     console.log(password);
     console.log(username);
+
+    fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        password
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(response => response.json()).then(data =>{ console.log('DATA', data)});
+
     setLogged(true)
   }
 

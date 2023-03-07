@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const MONGO_URI = 'mongodb+srv://backend:<iq4eJA8jSxukbiI4>@macrocluster.0gmu3hj.mongodb.net/?retryWrites=true&w=majority' 
+const MONGO_URI = 'mongodb+srv://davidtoyoukim:l8x7HpAUzswq3zCC@macro-calco.xqdajm4.mongodb.net/?retryWrites=true&w=majority'
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
-  usuUnifiedTopology: true,
+  useUnifiedTopology: true,
   dbName: 'Macro-Calco'
 })
   .then(() => console.log('Connected to Mongo DB.'));

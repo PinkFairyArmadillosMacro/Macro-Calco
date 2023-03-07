@@ -18,20 +18,24 @@ const PORT = 3000;
 
 app.use("/build", express.static(path.join(__dirname, "../build")));
 // serve index.html on the route '/'
-app.get("/", cookieController.setCookie, (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 app.get("/signup", (req, res) => {
+  console.log('hello')
   res.sendFile(path.resolve(__dirname, "../client/signup.html"));
 });
 
-app.post("/login", userController.verifyUser, (req, res) => {
-  
+app.post("/api/login", 
+  //userController.verifyUser, 
+  (req, res) => {
+    console.log('test', req.body)
+    res.status(200).json(res.locals.isLogged);
 });
 
 app.post("/signup", userController.createUser, (req, res) => {
-  res.redirect("/homepage");
+  res.status(200).json(res.locals.user)
 });
 
 app.get("/findRecipes", (req, res) => {
@@ -51,6 +55,10 @@ app.post(
   }
 );
 
+app.get('/collection', collectionController.generateSavedCollection, (req, res) => {
+  res.status(200).send('hello')
+})
+
 app.delete("/collection", collectionController.deleteCollection, (req, res) => {
   res.status(200).send("collection deleted successfully!");
 });
@@ -62,28 +70,6 @@ app.delete("/recipe", recipeController.deleteRecipe, (req, res) => {
 app.patch("/user", userController.updateMacros, (req, res) => {
   res.status(200).send("Macro goal updated successfully!");
 });
-
-// /**
-// * login
-// */
-// app.post('/login',
-//   userController.verifyUser,
-//   cookieController.setSSIDCookie,
-//   sessionController.startSession,
-//   (req, res) => res.redirect('/secret'));
-
-// /**
-// * Authorized routes
-// */
-// app.get('/secret', sessionController.isLoggedIn, (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../client/secret.html'));
-// });
-
-// app.get('/secret/users',
-//   sessionController.isLoggedIn,
-//   userController.getAllUsers,
-//   (req, res) => {res.send({ users: res.locals.users });
-// })
 
 //global error handler
 app.use((err, req, res, next) => {
