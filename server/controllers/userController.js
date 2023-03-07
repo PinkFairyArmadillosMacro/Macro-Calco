@@ -22,13 +22,12 @@ userController.createUser = async (req, res, next) => {
 
   // user request to update macro ratio
   userController.updateMacros = async (req, res, next) => {
+    //console.log('this is req.body', req.body)
     const { username, calorieGoal, proteinGoal, carbGoal, fatGoal} = req.body;
-      await User.updateOne({ username }, { calorieGoal, proteinGoal, carbGoal, fatGoal }, (err, user) => {
-        if (err) {
-          return next({message: {err: 'error in updateMacros!'}});
-        }
-        return next();
-      })
+    console.log('prev user', user);
+      const user = await User.updateOne({ username }, { calorieGoal, proteinGoal, carbGoal, fatGoal });
+      return next();
+      
   }
 
   userController.verifyUser = async (req, res, next) => {
@@ -37,7 +36,7 @@ userController.createUser = async (req, res, next) => {
       const { username, password } = req.body;
       // `findOne` returns a document/model instances, while
       // `find` returns a query object, which has no access to the methods
-      const result = await User.findOne({ username: username }).exec();
+      //const result = await User.findOne({ username: username }).exec();
       // If the username does not exist, `findOne` returns `null`
       if (result === null){
         res.locals.isLogged = false;
