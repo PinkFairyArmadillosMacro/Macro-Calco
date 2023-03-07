@@ -10,15 +10,15 @@ userController.createUser = async (req, res, next) => {
     console.log('that user name exists!')
   }
   else{
-    await User.create({ username, password, calorieGoal, proteinGoal, carbGoal, fatGoal }, (err, user) => {
-      if (err) {
-        return next({message: {err: 'error in createUser!'}});
-      }
+    const user = await User.create({ username, password, calorieGoal, proteinGoal, carbGoal, fatGoal });
+      // if (err) {
+      //   return next({message: {err: 'error in createUser!'}});
+      // }
       res.locals.user = user;
       return next();
-    })
-    };
-  }
+    }
+  };
+  
 
   // user request to update macro ratio
   userController.updateMacros = async (req, res, next) => {

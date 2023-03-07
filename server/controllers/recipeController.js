@@ -4,7 +4,7 @@ const User = models.User;
 
 const recipeController = {};
 
-// baseURL: https://api.edamam.com/api/recipes/v2?type=public&app_id=667c1c3a&app_key=0b6b0f12f39b034d2c5f749eaa229bbe&diet=balanced&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients
+const baseURL = 'https://api.edamam.com/api/recipes/v2?type=public&app_id=667c1c3a&app_key=0b6b0f12f39b034d2c5f749eaa229bbe&diet=balanced&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients'
 
 // (q: chicken rice beans)exampleURL: https://api.edamam.com/api/recipes/v2?type=public&q=chicken%20rice%20beans&app_id=667c1c3a&app_key=0b6b0f12f39b034d2c5f749eaa229bbe&diet=balanced&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients
 
@@ -17,53 +17,60 @@ const calculateRelevance = (recipeMacros, userMacros) => {
   // invoke convert to proportions to get percentages ie -> [2000, .25, .5, .25];
   let normalizedRecipe = normalizeRecipe(recipeMacros);
   let relevance =
-    abs(normalizedRecipe[1] - userMacros[1]) +
-    abs(normalizedRecipe[2] - userMacros[2]) +
-    abs(normalizedRecipe[3] - userMacros[3]);
+    Math.abs(normalizedRecipe[1] - userMacros[1]) +
+    Math.abs(normalizedRecipe[2] - userMacros[2]) +
+    Math.abs(normalizedRecipe[3] - userMacros[3]);
   //smaller the better, i.e. more relevant
+  //console.log('this is relevance', relevance, normalizedRecipe[1], userMacros[1], normalizedRecipe[2], userMacros[2], normalizedRecipe[3], userMacros[3])
   return relevance;
 };
 
 const normalizeRecipe = (macros) => {
   let kcal = macros[0];
   //might need to debug to add up to 100
-  let carbs = ((4 * macros[1]) / kcal).toFixed(2);
-  let fat = ((9 * macros[2]) / kcal).toFixed(2);
-  let protein = (4 * macros[3]) / kcal.toFixed(2);
-  if (carbs + fat + protein !== 1) {
-    console.log("went over 100!");
-  }
+  let carbs = ((4 * macros[1]) / kcal).toFixed(2)*100;
+  let fat = ((9 * macros[2]) / kcal).toFixed(2)*100;
+  let protein = (4 * macros[3]) / kcal.toFixed(2)*100;
+  // if (carbs + fat + protein !== 1) {
+  //   console.log("went over 100!");
+  // }
 
   return [kcal, carbs, fat, protein];
 };
 
 recipeController.sortRecipes = async (req, res, next) => {
-  const username = req.cookies.userCookie; //username as cookies
-  await User.findOne({ username }, (err, user) => {
-    if (err) {
-      return next({ message: { err: "error in sortRecipes!" } });
-    }
-    const userMacros = [
-      user.calorieGoal,
-      user.carbGoal,
-      user.fatGoal,
-      user.proteinGoal,
-    ];
-  });
-  const { query } = req.body;
+  const { username, url } = req.body;
+  //const username = req.cookies.userCookie; //username as cookies
+  const user = await User.findOne({ username });
+    // if (err) {
+    //   return next({ message: { err: "error in sortRecipes!" } });
+    // }
+  const userMacros = [
+    user.calorieGoal,
+    user.carbGoal,
+    user.fatGoal,
+    user.proteinGoal,
+  ];
+  console.log('this is user', user)
+  //console.log(url);
+  const response = await fetch(url);
+  const jsonResponse = await response.json();
+  //console.log('this is response', jsonResponse)
+  //const { query } = req.body;
   //req.body.query = 'chicken rice beans'
-  if (query === "") {
-    // const response = await fetch(baseURL);
-    // const data = await response.json;
-  }
+  // if (query === "") {
+  //   // const response = await fetch(baseURL);np
+  //   // const data = await response.json;
+  // }
 
-  const processedQuery = query.replaceAll(" ", "%20");
-  const queriedURL = baseURL + `&q=${processedQuery}`;
+  // const processedQuery = query.replaceAll(" ", "%20");
+  // const queriedURL = baseURL + `&q=${processedQuery}`;
 
-  const { hits } = req.body;
+  const { hits } = jsonResponse;
+  //console.log('this is recipes', hits)
   // for each element in hits array
   // recipe, link
-  const recipes = hits.slice(0, 1000);
+  const recipes = hits;
   for (const recipe of recipes) {
     const { calories, totalNutrients } = recipe.recipe;
     const { CHOCDF, FAT, PROCNT } = totalNutrients;
@@ -76,9 +83,13 @@ recipeController.sortRecipes = async (req, res, next) => {
   }
 
   recipes.sort((a, b) => a.relevance - b.relevance);
-
+  let count = 1;
+  for(const recipe of recipes){  
+    console.log(`Recipes ordered by relevance ${count++}.`, recipe.recipe.label, recipe.relevance)
+  }
   res.locals.recipes = recipes; // array of recipes sorted based on relevance
 
+  return next();
 };
 
 recipeController.saveRecipes = async (req, res, next) => {
