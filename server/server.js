@@ -48,10 +48,11 @@ app.post("/findRecipes", recipeController.sortRecipes, (req, res) => {
 
 app.post(
   "/collection",
+  recipeController.sortRecipes,
   recipeController.saveRecipes,
   collectionController.createCollection,
   (req, res) => {
-    res.status(200).send("collection created successfully!");
+    res.status(200).send(res.locals.collection);
   }
 );
 

@@ -95,7 +95,19 @@ recipeController.sortRecipes = async (req, res, next) => {
 recipeController.saveRecipes = async (req, res, next) => {
   // assign recipe to collection
   // destructure recipes array from request body
-  const { recipes } = req.body;
+  //const { recipes } = req.body;
+
+  //for demo
+  const { recipes } = res.locals;
+  for (const recipe of recipes){
+    recipe.servings = 1;
+  }
+
+
+
+
+
+
   // initialize empty recipeId array on res.locals
   res.locals.recipeIds = [];
   // iterate through all recipes of recipe array
@@ -128,13 +140,14 @@ recipeController.saveRecipes = async (req, res, next) => {
         cautions,
         calories,
         totalNutrients,
-      } = recipe;
+      } = recipe.recipe;
+      console.log('this is tN', recipe.recipe.label)
       const { FAT, CHOCDF, PROCNT } = totalNutrients;
       const fat = FAT.quantity;
       const carbs = CHOCDF.quantity;
       const protein = PROCNT.quantity;
       // create recipe document with all properties
-      Recipe.create(
+      const recipee = await Recipe.create(
         {
           label,
           image,
@@ -147,23 +160,26 @@ recipeController.saveRecipes = async (req, res, next) => {
           fat,
           carbs,
           protein,
-        },
-        (err, recipe) => {
-          if (err) {
-            return next({ message: { err: "error in saveRecipes!" } });
-          }
+        });
+        // (err, recipe) => {
+        //   if (err) {
+        //     return next({ message: { err: "error in saveRecipes!" } });
+        //   }
           // push created recipe ID to recipeID array
-          res.locals.recipeIds.push(recipe._id);
-        }
-      );
+          res.locals.recipeIds.push(recipee._id);
+        };
       res.locals.totals.calories += (servings * calories) / yield;
       res.locals.totals.fat += (servings * fat) / yield;
       res.locals.totals.carbs += (servings * carbs) / yield;
       res.locals.totals.protein += (servings * protein) / yield;
     }
-  }
-  return next();
+    console.log(res.locals);
+    return next();
+
 };
+
+  
+
 
 recipeController.deleteRecipe = (req, res, next) => {};
 
