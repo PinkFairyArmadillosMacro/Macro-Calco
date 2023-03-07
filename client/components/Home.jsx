@@ -19,7 +19,7 @@ const Home = () => {
         protein: 140,
         cals: 1900
       },
-      totalRecipes: 3,
+      totalRecipes: 4,
       recipes:[
         {
           name: 'Chicken Pasta',
@@ -117,17 +117,23 @@ const Home = () => {
     // console.log('DELETED SOMETHING', collectionName);
   }
 
+  // useEffect( ()=>{
+  //   //const userCollections = await fetch('/collection') 
+  // }, [])
+
   const deleteRecipeCollectionItem = (collectionItemName) => {
 
   }
   
   
 
-    const allSavedCollections = savedCollections.map((singleCollection) => (
+    const allSavedCollections = savedCollections.map((singleCollection, i) => (
       <RecipeCollection 
         collection={singleCollection}
         deleteRecipeCollection={deleteRecipeCollection}
         deleteRecipeCollectionItem={deleteRecipeCollectionItem}
+        location={'home'}
+        key = {i}
       />
     ))
     return (

@@ -29,20 +29,9 @@ collectionController.deleteCollection = (req, res, next) => {
   Collection.deleteOne({ name: req.body.name });
 };
 
-// chadGPT SAYS
-// const Collection = require('./models/collection');
-
-// // Create a new instance of the Collection model with the collection name
-// const newCollection = new Collection({
-//   name: req.body.name
-// });
-
-// // Iterate through each recipe in the req.body and add a reference to the Recipe instance
-// for (let recipe of req.body.recipes) {
-//   newCollection.recipes.push(recipe._id);
-// }
-
-// // Save the Collection instance to the database
-// await newCollection.save();
+collectionController.generateSavedCollection = (req, res, next) => {
+  const {username} = res.cookies;
+  return next()
+}
 
 module.exports = collectionController;
