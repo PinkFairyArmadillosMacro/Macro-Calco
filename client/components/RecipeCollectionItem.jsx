@@ -31,6 +31,8 @@ const RecipeCollectionItem = (props) => {
         }
       }
     }
+
+    
   }
 
   return (
