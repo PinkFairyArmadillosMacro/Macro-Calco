@@ -10,9 +10,9 @@ const connectDB = require('./db/connectdb');
 
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const userController = require("./controllers/userController");
-const recipeController = require("./controllers/recipeController");
-const collectionController = require("./controllers/collectionController");
+// const userController = require("./controllers/userController");
+// const recipeController = require("./controllers/recipeController");
+// const collectionController = require("./controllers/collectionController");
 
 app.use(cookieParser());
 app.use(express.json());
@@ -22,7 +22,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const PORT = 3000;
 
 // routers section
-const userRouter = require('./routes/userRouter')
+const userRouter = require('./routes/userRouter');
+const recipeRouter = require('./routes/recipeRouter');
+const collectionRouter = require('./routes/collectionRouter');
 
 app.use("/build", express.static(path.join(__dirname, "../build")));
 // serve index.html on the route '/'
@@ -36,7 +38,8 @@ app.use("/build", express.static(path.join(__dirname, "../build")));
 // });
 
 app.use('/api/user', userRouter);
-
+app.use('/api/recipe', recipeRouter);
+app.use('/api/collection', collectionRouter);
 
 // app.post("/api/login", 
 //   //userController.verifyUser, 
@@ -53,35 +56,36 @@ app.use('/api/user', userRouter);
 //   res.sendFile(path.resolve(__dirname, "../client/find.html"));
 // });
 
-app.post("/findRecipes", recipeController.sortRecipes, (req, res) => {
-  res.status(200).json(res.locals.recipes);
-});
+// app.post("/findRecipes",
+//   recipeController.saveRecipes,
+//   recipeController.sortRecipes, 
+//   (req, res) => {
+//   res.status(200).json(res.locals.recipes);
+// });
 
-app.post(
-  "/collection",
-  recipeController.sortRecipes,
-  recipeController.saveRecipes,
-  collectionController.createCollection,
-  (req, res) => {
-    res.status(200).send(res.locals.collection);
-  }
-);
+// app.post(
+//   "/collection",
+//   collectionController.createCollection,
+//   (req, res) => {
+//     res.status(200).send(res.locals.collection);
+//   }
+// );
 
-app.get('/collection', collectionController.generateSavedCollection, (req, res) => {
-  res.status(200).send('hello')
-})
+// app.get('/collection', collectionController.generateSavedCollection, (req, res) => {
+//   res.status(200).send('hello')
+// })
 
-app.delete("/collection", collectionController.deleteCollection, (req, res) => {
-  res.status(200).send("collection deleted successfully!");
-});
+// app.delete("/collection", collectionController.deleteCollection, (req, res) => {
+//   res.status(200).send("collection deleted successfully!");
+// });
 
-app.delete("/recipe", recipeController.deleteRecipe, (req, res) => {
-  res.status(200).send("recipe deleted successfully!");
-});
+// app.delete("/recipe", recipeController.deleteRecipe, (req, res) => {
+//   res.status(200).send("recipe deleted successfully!");
+// });
 
-app.patch("/user", userController.updateMacros, (req, res) => {
-  res.status(200).send("Macro goal updated successfully!");
-});
+// app.patch("/user", userController.updateMacros, (req, res) => {
+//   res.status(200).send("Macro goal updated successfully!");
+// });
 
 //global error handler
 app.use((err, req, res, next) => {
