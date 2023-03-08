@@ -15,9 +15,9 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   collections: [{ type: Schema.Types.ObjectId, ref: 'collection' }],
   calorieGoal: Number,
-  proteinGoal: Number,
-  carbGoal: Number,
   fatGoal: Number,
+  carbsGoal: Number,
+  proteinGoal: Number,
 });
 
 const SALT_WORK_FACTOR = 10;
@@ -49,6 +49,7 @@ const User = mongoose.model('user', userSchema);
 
 const recipeSchema = new Schema({
   label: { type: String, required: true },
+  relevance: Number,
   image: { type: String, required: true },
   shareAs: { type: String, required: true },
   yield: { type: Number, required: true },

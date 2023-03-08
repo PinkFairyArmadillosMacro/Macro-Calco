@@ -11,7 +11,7 @@ const baseURL = 'https://api.edamam.com/api/recipes/v2?type=public&app_id=df53c4
 
 
 const calculateRelevance = (recipeMacros, userMacros) => {
-  //recipesMacros, userMacros = [calories, carbs, fat, protein] -> [2000, 125g, 250g, 125g]
+  //recipesMacros, userMacros = [calories, fat, carb, protein] 
   // invoke convert to proportions to get percentages ie -> [2000, .25, .5, .25];
   let normalizedRecipe = normalizeRecipe(recipeMacros);
   let relevance =
@@ -58,6 +58,8 @@ recipeController.saveRecipes = async (req, res, next) => {
       await Recipe.create({ label, image, shareAs, yield, dietLabels, healthLabels, cautions, calories, fat, carbs, protein });
     }
   }
+
+  return next();
 }
 
 
@@ -72,22 +74,28 @@ recipeController.sortRecipes = async (req, res, next) => {
   const user = await User.findOne({ username });
   const userMacros = [
     user.calorieGoal,
-    user.carbGoal,
     user.fatGoal,
+    user.carbsGoal,
     user.proteinGoal,
   ];
-{
+
+  let recipeMacros;
+  const recipes = await Recipe.find({}); //returns array of recipe documents
+  for (const recipe of recipes){
+    recipeMacros = [calories, fat, carbs, protein];
     recipe.relevance = calculateRelevance(recipeMacros, userMacros);
+    await recipe.save();
   }
 
   recipes.sort((a, b) => a.relevance - b.relevance);
-  let count = 1;
-  for(const recipe of recipes){  
-    console.log(`Recipes ordered by relevance ${count++}.`, recipe.recipe.label, recipe.relevance)
-  }
-  res.locals.recipes = recipes; // array of recipes sorted based on relevance
-
+  console.log(recipes);
   return next();
+//   for(const recipe of recipes){  
+//     console.log(`Recipes ordered by relevance ${count++}.`, recipe.recipe.label, recipe.relevance)
+//   }
+//   res.locals.recipes = recipes; // array of recipes sorted based on relevance
+
+//   return next();
 };
 
 

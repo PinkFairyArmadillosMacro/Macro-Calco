@@ -14,16 +14,11 @@ const Login = ({setLogged, isLogged}) => {
 
   const passwordChange = (e) => { setPassword(e.target.value) }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     
     e.preventDefault();
-    // make post request to backend (send username password)
-    // backend will verify
-    // change isLogged true
-    console.log(password);
-    console.log(username);
 
-    fetch('/api/login', {
+     const nonJSON = await fetch('/api/user/login', {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -32,7 +27,9 @@ const Login = ({setLogged, isLogged}) => {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then(response => response.json()).then(data =>{ console.log('DATA', data)});
+    })
+
+    const loginResponse = nonJSON.json();
 
     setLogged(true)
   }
