@@ -14,9 +14,11 @@ const RecipeCollection = (props) => {
   let num = 0;
   const recipeCollectionItems = collection.recipes.map((recipe) => {
     return (
-      <RecipeCollectionItem 
+      <RecipeCollectionItem
+        key = {num}
         name = {recipe.label}
-        servingSize = {recipe.yield}
+        servingSize = {recipe.servings}
+        yield = {recipe.yield}
         cals = {recipe.calories}
         protein = {recipe.protein}
         carbs = {recipe.carbs}
@@ -64,15 +66,20 @@ const RecipeCollection = (props) => {
             </div>
           </div>
         </div>
-        <p className='collection-totals-label'> Total Recipes: {collection.recipeIds.length} </p>
+        <p className='collection-totals-label'> Total Recipes: {collection.recipes.length} </p>
       </div>
       <div className='collection-scroll'>
         {recipeCollectionItems}
       </div>
       <div className="recipe-collection-buttons">
-        <button onClick={() => deleteRecipeCollection(collection.name)} className='recipe-collection-delete-btn'>
-          Delete Collection
-        </button>
+        {location === 'home'
+          ?        
+          <button onClick={() => deleteRecipeCollection(collection.name)} className='recipe-collection-delete-btn'>
+            Delete Collection
+          </button>
+          :<></>
+        }
+
       </div>
     </div>
   );

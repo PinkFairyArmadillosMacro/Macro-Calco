@@ -8,6 +8,7 @@ const RecipeCollectionItem = (props) => {
   const { deleteRecipeCollectionItem, collection, setCurrentCollection, location} = props;
   const {totalMacros} = collection
   const {name, servingSize, cals, protein, carbs, fat, url, id} = props;
+  const noOfServings = props.yield;
 
   const handleDeleteItem = (e) => { 
     //if were deleting a recipe from our collection in FindRecipe
@@ -18,16 +19,15 @@ const RecipeCollectionItem = (props) => {
           newRecipes.splice(recipeInd, 1)
           console.log(newRecipes)
           setCurrentCollection({
-            totalMacros:{
-              carbs: totalMacros.carbs - (Math.floor(carbs/servingSize)* servingSize),
-              fat: totalMacros.fat - (Math.floor(fat/servingSize) * servingSize),
-              protein: totalMacros.protein -  (Math.floor(protein/servingSize) * servingSize),
-              cals: totalMacros.cals -  (Math.floor(cals/servingSize) * servingSize)
-            },
+            totalCarbs: totalCarbs - (Math.floor(carbs/noOfServings)* servingSize),
+            totalFat: totalFat - (Math.floor(fat/noOfServings) * servingSize),
+            totalProtein: totalProtein -  (Math.floor(protein/noOfServings) * servingSize),
+            totalCalories: totalCalories -  (Math.floor(cals/noOfServings) * servingSize),
             recipes: newRecipes,
             totalRecipes: collection.totalRecipes - 1
           })
           console.log(collection)
+          break;
         }
       }
     }
