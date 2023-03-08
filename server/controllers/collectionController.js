@@ -1,38 +1,48 @@
 const models = require("../models/models");
 const Collection = models.Collection;
+const User = models.User;
 const collectionController = {};
 
-collectionController.createCollection = async (req, res, next) => {
-  const { recipeIds, totals } = res.locals;
-  const { fat, carbs, protein, calories } = totals;
-  // Create a new instance of the Collection model with the collection name
-  const newCollection = new Collection({
-    name: req.body.name,
-    recipes: [],
-    totalFat: fat,
-    totalCarbs: carbs,
-    totalProtein: protein,
-    totalCalories: calories,
-  });
+// const collectionSchema = new Schema({
+//   name: { type: String, required: true },
+//   totalCarbs: { type: Number, required: true },
+//   totalProtein: { type: Number, required: true },
+//   totalFat: { type: Number, required: true },
+//   totalCalories: { type: Number, required: true },
+//   recipeIds: [{ type: Schema.Types.ObjectId, ref: 'recipe' }],
+// });
 
-  // Iterate through each recipe in the req.body and add a reference to the Recipe instance
-  for (let recipeId of recipeIds) {
-    newCollection.recipes.push(recipeId);
-  }
-  // Save the Collection instance to the database
-  await newCollection.save();
+collectionController.createCollection = async (req, res, next) => {
+
+  const { recipes, name, totalCalories, totalFat, totalCarbs, totalProtein } = req.body;
+  const recipeIds = recipes.map(recipe => recipe._id);
+  //create collection
+  const collection = await Collection.create({ name, totalCarbs, totalProtein, totalFat, totalCalories, recipeIds });
+
+  //save it to user
+  username = req.cookies.username;
+  const user = await User.findOne({ username });
+  user.collections.push(collection._id);
+
+  await user.save();
 
   return next();
 };
 
-collectionController.deleteCollection = (req, res, next) => {
-  Collection.deleteOne({ name: req.body.name });
+collectionController.deleteCollection = async (req, res, next) => {
+  const username = req.cookies.username;
+  const { _id } = req.params;
+  await Collection.deleteOne({ _id });
+
+  const user = User.findOne({ username });
+  const collectionIndex = user.collections.indexOf(_id);
+  user.collections.splice(collectionIndex, 1);
+
+  await user.save();
+
+  return next();
 };
 
-collectionController.generateSavedCollection = (req, res, next) => {
-  const {username} = res.cookies;
-  return next()
-}
 
 module.exports = collectionController;
 

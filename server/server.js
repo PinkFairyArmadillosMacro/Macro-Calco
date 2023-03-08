@@ -89,6 +89,7 @@ app.use('/api/collection', collectionRouter);
 
 //global error handler
 app.use((err, req, res, next) => {
+  console.log('err', err)
   const defaultErr = {
     log: "Express error handler caught unknown middleware error",
     status: 400,

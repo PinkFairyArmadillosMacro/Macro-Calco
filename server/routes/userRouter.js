@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createUser, verifyUser, updateMacros} = require('../controllers/userController');
+const { createUser, verifyUser, updateMacros, getUser} = require('../controllers/userController');
 
 // TODO
 router.post('/signup', createUser, (req, res) => {
@@ -14,10 +14,15 @@ router.post('/login', verifyUser, (req, res) => {
   return res.status(200).json(res.locals.isLogged);
 });
 
+router.get('/myaccount', getUser, (req, res) => {
+  return res.status(200).json(res.locals.user);
+});
+
 // TODO
-// update user's macros based on user id
-router.patch('/:id', updateMacros, (req, res) => {
-  return res.status(200).send("Macro goal updated successfully!");
+// update user's macros based on username
+router.patch('/updatemacros', updateMacros, (req, res) => {
+  const { calorieGoal, proteinGoal, carbsGoal, fatGoal } = res.locals.updatedUserMacros;
+  return res.status(200).json({ calorieGoal, proteinGoal, carbsGoal, fatGoal });
 })
 
 module.exports = router;

@@ -37,13 +37,13 @@ userSchema.pre('save', function (next) {
 //   const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
 // });
 
-userSchema.methods.comparePassword = async function (candidatePassword) {
-  return bcrypt.compare(candidatePassword, this.password);
-};
+// userSchema.methods.comparePassword = async function (candidatePassword) {
+//   return bcrypt.compare(candidatePassword, this.password);
+// };
 
-userSchema.method('comparePassword', function (candidatePassword) {
-  return bcrypt.compare(candidatePassword, this.password);
-});
+// userSchema.method('comparePassword', function (candidatePassword) {
+//   return bcrypt.compare(candidatePassword, this.password);
+// });
 
 const User = mongoose.model('user', userSchema);
 
@@ -69,7 +69,7 @@ const collectionSchema = new Schema({
   totalProtein: { type: Number, required: true },
   totalFat: { type: Number, required: true },
   totalCalories: { type: Number, required: true },
-  recipeIds: [{ type: Schema.Types.ObjectId, ref: 'recipe' }],
+  recipes: [{ servings: Number, recipeId: { type: Schema.Types.ObjectId, ref: 'recipe' }}],
 });
 
 const Collection = mongoose.model('collection', collectionSchema);
