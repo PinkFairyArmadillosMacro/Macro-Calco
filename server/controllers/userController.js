@@ -8,6 +8,7 @@ userController.createUser = async (req, res, next) => {
   const { username, password, calorieGoal, proteinGoal, carbGoal, fatGoal } = req.body;
   if(await User.exists({ username })) {
     console.log('that user name exists!')
+    
   }
   else{
     const user = await User.create({ username, password, calorieGoal, proteinGoal, carbGoal, fatGoal });
@@ -36,12 +37,12 @@ userController.createUser = async (req, res, next) => {
       const { username, password } = req.body;
       // `findOne` returns a document/model instances, while
       // `find` returns a query object, which has no access to the methods
-      //const result = await User.findOne({ username: username }).exec();
+      const result = await User.findOne({ username, password }).exec();
       // If the username does not exist, `findOne` returns `null`
-      if (result === null){
-        res.locals.isLogged = false;
-        return next();
-      };
+      // if (result === null){
+      //   res.locals.isLogged = false;
+      //   return next();
+      // };
       res.cookie('username', username);
       res.locals.isLogged = true;
       // const isMatch = await result.comparePassword(password);
