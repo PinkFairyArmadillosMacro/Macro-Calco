@@ -1,17 +1,16 @@
-const models = require("../models/models");
+const models = require('../models/models');
 const Recipe = models.Recipe;
 const User = models.User;
 
 const recipeController = {};
 
 //MIGHT NEED TO DEBGUG FOR &q= AT THE END
-const baseURL = 'https://api.edamam.com/api/recipes/v2?type=public&app_id=df53c42b&app_key=42722d0f8c7171ba43d1b261ca01b673&ingr=1%2B&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients&q='
+const baseURL =
+  'https://api.edamam.com/api/recipes/v2?type=public&app_id=df53c42b&app_key=42722d0f8c7171ba43d1b261ca01b673&ingr=1%2B&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients&q=';
 //str.replaceAll(" ", "%20");
 
-
-
 const calculateRelevance = (recipeMacros, userMacros) => {
-  //recipesMacros, userMacros = [calories, fat, carb, protein] 
+  //recipesMacros, userMacros = [calories, fat, carb, protein]
   // invoke convert to proportions to get percentages ie -> [2000, .25, .5, .25];
   let normalizedRecipe = normalizeRecipe(recipeMacros);
   let relevance =
@@ -26,16 +25,15 @@ const calculateRelevance = (recipeMacros, userMacros) => {
 const normalizeRecipe = (macros) => {
   let kcal = macros[0];
   //might need to debug to add up to 100
-  let carbs = ((4 * macros[1]) / kcal).toFixed(2)*100;
-  let fat = ((9 * macros[2]) / kcal).toFixed(2)*100;
-  let protein = (4 * macros[3]) / kcal.toFixed(2)*100;
+  let fat = ((9 * macros[1]) / kcal).toFixed(2) * 100;
+  let carbs = ((4 * macros[2]) / kcal).toFixed(2) * 100;
+  let protein = ((4 * macros[3]) / kcal.toFixed(2)) * 100;
   // if (carbs + fat + protein !== 1) {
   //   console.log("went over 100!");
   // }
 
   return [kcal, carbs, fat, protein];
 };
-
 
 recipeController.saveRecipes = async (req, res, next) => {
   // save recipe to the collection in mongoose
@@ -44,34 +42,51 @@ recipeController.saveRecipes = async (req, res, next) => {
   const jsonResponse = await response.json();
   const recipes = jsonResponse.hits;
 
-  for (const recipe of recipes) {
-    const { label } = recipe.recipe;
+  for (const recipeObj of recipes) {
+    const { label } = recipeObj.recipe;
     // check for if recipe is in collection
     let recipeInDB = await Recipe.exists({ label });
     if (!recipeInDB) {
-      // create recipe document if not in collection
-      const { label, image, shareAs, yield, dietLabels, healthLabels, cautions, calories, totalNutrients } = recipe.recipe;
+      // create recipe document if not in database
+      const {
+        label,
+        image,
+        shareAs,
+        yield,
+        dietLabels,
+        healthLabels,
+        cautions,
+        calories,
+        totalNutrients,
+      } = recipeObj.recipe;
       const { FAT, CHOCDF, PROCNT } = totalNutrients;
       const fat = FAT.quantity;
       const carbs = CHOCDF.quantity;
       const protein = PROCNT.quantity;
-      await Recipe.create({ label, image, shareAs, yield, dietLabels, healthLabels, cautions, calories, fat, carbs, protein });
+      await Recipe.create({
+        label,
+        image,
+        shareAs,
+        yield,
+        dietLabels,
+        healthLabels,
+        cautions,
+        calories,
+        fat,
+        carbs,
+        protein,
+      });
     }
   }
-
   return next();
-}
-
-
-
-
-
-
+};
 
 recipeController.sortRecipes = async (req, res, next) => {
+  const username = 'username';
 
-  const username = req.cookies.username;
+  //const username = req.cookies.username;
   const user = await User.findOne({ username });
+  console.log('did it get the user', user);
   const userMacros = [
     user.calorieGoal,
     user.fatGoal,
@@ -81,26 +96,20 @@ recipeController.sortRecipes = async (req, res, next) => {
 
   let recipeMacros;
   const recipes = await Recipe.find({}); //returns array of recipe documents
-  for (const recipe of recipes){
-    recipeMacros = [calories, fat, carbs, protein];
+  for (const recipe of recipes) {
+    recipeMacros = [recipe.calories, recipe.fat, recipe.carbs, recipe.protein];
+
     recipe.relevance = calculateRelevance(recipeMacros, userMacros);
     await recipe.save();
   }
-
+  console.log('did it get recipe', 1);
   recipes.sort((a, b) => a.relevance - b.relevance);
-  console.log(recipes);
-  return next();
-//   for(const recipe of recipes){  
-//     console.log(`Recipes ordered by relevance ${count++}.`, recipe.recipe.label, recipe.relevance)
-//   }
-//   res.locals.recipes = recipes; // array of recipes sorted based on relevance
+  res.locals.recipesToSend = recipes;
 
-//   return next();
+  return next();
 };
 
-
-
-recipeController.deleteRecipe = (req, res, next) => {};
+recipeController.deleteRecipe = async (req, res, next) => {};
 
 module.exports = recipeController;
 

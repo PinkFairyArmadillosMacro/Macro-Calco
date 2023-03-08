@@ -5,13 +5,14 @@ const userController = {};
 
 userController.createUser = async (req, res, next) => {
   console.log('this is req.body on signup post request', req.body);
-  const { username, password, calorieGoal, proteinGoal, carbGoal, fatGoal } = req.body;
+  const { username, password, calorieGoal, proteinGoal, carbsGoal, fatGoal } = req.body;
+  res.cookie('username', username);
   if(await User.exists({ username })) {
     console.log('that user name exists!')
     
   }
   else{
-    const user = await User.create({ username, password, calorieGoal, proteinGoal, carbGoal, fatGoal });
+    const user = await User.create({ username, password, calorieGoal, proteinGoal, carbsGoal, fatGoal });
       // if (err) {
       //   return next({message: {err: 'error in createUser!'}});
       // }
@@ -24,9 +25,9 @@ userController.createUser = async (req, res, next) => {
   // user request to update macro ratio
   userController.updateMacros = async (req, res, next) => {
     //console.log('this is req.body', req.body)
-    const { username, calorieGoal, proteinGoal, carbGoal, fatGoal} = req.body;
+    const { username, calorieGoal, proteinGoal, carbsGoal, fatGoal} = req.body;
     console.log('prev user', user);
-      const user = await User.updateOne({ username }, { calorieGoal, proteinGoal, carbGoal, fatGoal });
+      const user = await User.updateOne({ username }, { calorieGoal, proteinGoal, carbsGoal, fatGoal });
       return next();
       
   }

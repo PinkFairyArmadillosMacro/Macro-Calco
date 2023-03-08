@@ -3,18 +3,21 @@ const router = express.Router();
 
 const { createCollection, deleteCollection, generateSavedCollection } = require('../controllers/collectionController');
 
+// TODO
 // create a collection and save to database
-router.post('/', collectionController.createCollection, (req, res) => {
+router.post('/', createCollection, (req, res) => {
   return res.status(200).send(res.locals.collection);
 });
 
+// TODO
 // get ALL saved collections from user
-router.get('/', collectionController.generateSavedCollection, (req, res) => {
+router.get('/', generateSavedCollection, (req, res) => {
   return res.status(200).send('hello')
 })
 
+// TODO
 // delete a saved collection from user by id
-router.delete('/:id', collectionController.deleteCollection, (req, res) => {
+router.delete('/:id', deleteCollection, (req, res) => {
   return res.status(200).send("collection deleted successfully!");
 })
 
