@@ -5,33 +5,42 @@ import RecipeCollectionItem from './RecipeCollectionItem.jsx';
 
 const RecipeCollection = (props) => {
   
-  const { deleteRecipeCollection } = props;
-  
   const { setSavedCollections } = props;
   
   const {collection, setCurrentCollection, location} = props
 
-  let num = 0;
-  const recipeCollectionItems = collection.recipes.map((recipe) => {
+
+  const recipeCollectionItems = collection.recipes.map((recipe,i) => {
     return (
       <RecipeCollectionItem
-        key = {num}
+        key = {i}
         name = {recipe.label}
-        servingSize = {recipe.servings}
+        servings = {recipe.servings}
         yield = {recipe.yield}
         cals = {recipe.calories}
         protein = {recipe.protein}
         carbs = {recipe.carbs}
         fat = {recipe.fat}
         url = {recipe.image}
-        id = {num++}
+        id = {recipe._id}
         //recipe url needed
         collection = {collection}
         setCurrentCollection = {setCurrentCollection}
         location = {location}
+        collectionId = {collection._id}
         />
         )
-      })
+    }
+  )
+
+  const handleClick = async(e) => {
+    e.preventDefault();
+    const id = collection._id
+
+    await fetch(`/api/recipe/collection/?id=${id}`);
+
+  }
+
 
       /*
         name: { type: String, required: true },
@@ -74,7 +83,7 @@ const RecipeCollection = (props) => {
       <div className="recipe-collection-buttons">
         {location === 'home'
           ?        
-          <button onClick={() => deleteRecipeCollection(collection.name)} className='recipe-collection-delete-btn'>
+          <button onClick={handleClick} className='recipe-collection-delete-btn'>
             Delete Collection
           </button>
           :<></>

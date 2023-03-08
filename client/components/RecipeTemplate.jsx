@@ -19,12 +19,12 @@ const RecipeTemplate = (props) => {
     dietLabels,
     cautions,
     shareAs,
+    _id
   } = props.recipeInfo;
   const noOfServings = props.recipeInfo.yield;
 
-  const { setCurrentCollection, currentCollection } = props; //
-  const { totalCarbs, totalProtein, totalFat, totalCalories, recipes } =
-    props.currentCollection;
+  const { setCurrentCollection, currentCollection } = props;
+  const { totalCarbs, totalProtein, totalFat, totalCalories, recipes } = props.currentCollection;
   const [desiredServings, setDesiredServings] = useState(noOfServings);
 
   /*
@@ -49,26 +49,28 @@ const RecipeTemplate = (props) => {
   const handleClick = (e) => {
     let newRecipeList = recipes;
     newRecipeList.push({
+      _id,
       label,
       yield: noOfServings,
       servings: desiredServings,
-      calories: Math.floor(calories / noOfServings) * desiredServings,
-      protein: Math.floor(protein / noOfServings) * desiredServings,
-      carbs: Math.floor(carbs / noOfServings) * desiredServings,
-      fat: Math.floor(fat / noOfServings) * desiredServings,
+      calories: Math.floor((calories / noOfServings) * desiredServings),
+      protein: Math.floor((protein / noOfServings) * desiredServings),
+      carbs: Math.floor((carbs / noOfServings) * desiredServings),
+      fat: Math.floor((fat / noOfServings) * desiredServings),
       image,
     });
-    setCurrentCollection({
-      totalCarbs:
-        totalCarbs + Math.floor(carbs / noOfServings) * desiredServings,
-      totalFat: totalFat + Math.floor(fat / noOfServings) * desiredServings,
-      totalProtein:
-        totalProtein + Math.floor(protein / noOfServings) * desiredServings,
-      totalCalories:
-        totalCalories + Math.floor(calories / noOfServings) * desiredServings,
-      recipes: newRecipeList,
+    console.log('totalCarbs before adding:', totalCarbs)
+    setCurrentCollection(prevCollection => {
+      return {
+        ...prevCollection,
+        totalCarbs: prevCollection.totalCarbs + Math.floor((carbs / noOfServings) * desiredServings),
+        totalProtein: prevCollection.totalProtein + Math.floor((protein / noOfServings) * desiredServings),
+        totalFat: prevCollection.totalFat + Math.floor((fat / noOfServings) * desiredServings),
+        totalCalories: prevCollection.totalCalories + Math.floor((calories / noOfServings) * desiredServings),
+        recipes: newRecipeList,
+      }
     });
-    console.log(currentCollection);
+    //console.log(currentCollection);
   };
 
   const redirectToInfoPage = () => {};
@@ -144,15 +146,16 @@ const RecipeTemplate = (props) => {
             <div id="nutrition-health-labels-container">
               <p>*Health Labels: {healthLabels}</p>
               <p>*Diet Labels: {dietLabels}</p>
+              <p>*Allergy Information: {cautions}</p>
             </div>
           </div>
         </div>
       </div>
-      <form id="desired-serving-form">
+      <form id="desired-serving-form" onSubmit={(e)=>{e.preventDefault()}}>
         <label id="desired-serving-label">
           Desired # of servings (must be less than servings per recipe)
         </label>
-        <input onChange={desiredChange}></input>
+        <input onChange={desiredChange} ></input>
       </form>
       <div className="recipe-crud-buttons">
         <svg

@@ -22,6 +22,18 @@ const MyAccount = (props) => {
     setIsSetUp(true)
   }
 
+  // username: { type: String, required: true, unique: true },
+  // password: { type: String, required: true },
+  // collections: [{ type: Schema.Types.ObjectId, ref: 'collection' }],
+  // calorieGoal: Number,
+  // fatGoal: Number,
+  // carbsGoal: Number,
+  // proteinGoal: Number,
+
+  /*
+    we are making a get request to /api/user/myaccount
+  */
+
   return (
     <div className="my-account-container">
       <div className="macro-update-form-container">
