@@ -11,18 +11,14 @@ const FindRecipe = (props) => {
   const [collectionName, setCollectionName] = useState('')
   const [currentCollection, setCurrentCollection] = useState(
     { name: '',
-      totalMacros: {
-        carbs: 0,
-        fat: 0,
-        protein: 0,
-        cals: 0
-      },
-      totalRecipes: 0,
-      recipes: [
-      
-      ]
+      totalCarbs: 0,
+      totalProtein: 0,
+      totalFat: 0, 
+      totalCalories: 0,
+      recipes: []
     }
   );
+  const [recipesFromSearch, setRecipesFromSearch] = useState([])
   const dummyRecipes = [
     {
       name: 'Chicken Pasta',
@@ -71,6 +67,25 @@ const FindRecipe = (props) => {
     },
   ]
 
+  // const recipeSchema = new Schema({
+  //   label: { type: String, required: true},
+  //   servings: { type: Number, required: true},
+  //   image: { type: String, required: true},
+  //   shareAs: { type: String, required: true},
+  //   yield: { type: Number, required: true},
+  //   dietLabels: { type: Array, required: true},
+  //   healthLabels: { type: Array, required: true},
+  //   cautions: { type: Array, required: true},
+  //   calories: { type: Number, required: true},
+  //   carbs: { type: Number, required: true},
+  //   protein: { type: Number, required: true},
+  //   fat: { type: Number, required: true}
+  // });
+
+  useEffect(() => {
+    handleQuerySubmit()
+  }, [])
+
   const onNameChange = (e) => {setCollectionName(e.target.value)}
 
   const handleQueryChange = (e) => {
@@ -78,9 +93,18 @@ const FindRecipe = (props) => {
     setSearchQuery(value);
   }
 
-  const handleQuerySubmit = (e) => {
+  const handleQuerySubmit = async (e) => {
     e.preventDefault();
     // TODO: SEND GET REQUEST TO BACKEND
+    let response = await fetch('/api/findRecipes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body : JSON.stringify({q: searchQuery})
+    })
+    response = await response.json();
+    setRecipesFromSearch(response);
   }
 
   const handleCollectionSubmit = (e) =>{
@@ -89,9 +113,12 @@ const FindRecipe = (props) => {
     console.log(currentCollection)
   }
 
-  const recipeSelection = dummyRecipes.map((recipe) => (
-    <RecipeTemplate recipeInfo={recipe} currentCollection={currentCollection} setCurrentCollection={setCurrentCollection}/>
-  ));
+  const recipeSelection = null;
+  useEffect(() => {
+    recipeSelection = recipesFromSearch.map((recipe) => (
+      <RecipeTemplate recipeInfo={recipe} currentCollection={currentCollection} setCurrentCollection={setCurrentCollection}/>
+    ));
+  }, [recipesFromSearch]);
 
   return (
       <div className='find-recipe-container'>
