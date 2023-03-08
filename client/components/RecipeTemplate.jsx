@@ -30,12 +30,14 @@ const RecipeTemplate = (props) => {
   const desiredChange = (e) => {setDesiredServings(e.target.value) }
 
   const handleClick = (e) =>{
+    let newRecipeList = recipes
+    newRecipeList.push({label, yield: noOfServings, servings: desiredServings, calories: (Math.floor(calories/noOfServings)* desiredServings), protein: (Math.floor(protein/noOfServings)* desiredServings), carbs:(Math.floor(carbs/noOfServings)* desiredServings), fat: (Math.floor(fat/noOfServings)*desiredServings)});
     setCurrentCollection({
       totalCarbs: totalCarbs + (Math.floor(carbs/noOfServings)* desiredServings),
       totalFat: totalFat +  (Math.floor(fat/noOfServings)* desiredServings),
       totalProtein: totalProtein +  (Math.floor(protein/noOfServings)* desiredServings),
       totalCalories:  totalCalories +  (Math.floor(calories/noOfServings)* desiredServings),
-      recipes: recipes.concat({label, yield: noOfServings, servings: desiredServings, calories: (Math.floor(calories/noOfServings)* desiredServings), protein: (Math.floor(protein/noOfServings)* desiredServings), carbs:(Math.floor(carbs/noOfServings)* desiredServings), fat: (Math.floor(fat/noOfServings)* desiredServings)})
+      recipes: newRecipeList
     })
     console.log(currentCollection)
   }

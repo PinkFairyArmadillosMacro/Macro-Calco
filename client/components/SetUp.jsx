@@ -23,9 +23,9 @@ const SetUp = (props) => {
     const body = {
       username: props.username,
       password: props.password,
-      caloriesGoal: calories,
+      calorieGoal: calories,
       proteinGoal: proteins,
-      carbGoal: carbs,
+      carbsGoal: carbs,
       fatGoal: fats,
     }
     const response = await fetch('/api/user/signup', {
