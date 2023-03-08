@@ -6,107 +6,111 @@ import RecipeCollection from './RecipeCollection.jsx';
 
 const Home = () => {
 
-  // useEffect(() => {
-  //   fetch()
-  // });
 
   const recipeCollections = 
-    [{ 
-      name: 'My Collection 1',
-      totalMacros: {
-        carbs: 50,
-        fat: 50,
-        protein: 140,
-        cals: 1900
+    [
+      { 
+        name: 'My Collection 1',
+        totalCarbs: 50,
+        totalFat: 50,
+        totalProtein: 140,
+        totalCa: 1900,
+        totalRecipes: 4,
+        recipes:[
+          {
+            name: 'Chicken Pasta',
+            yield: 2,
+            servings: 2,
+            calories:640,
+            protein: 50,
+            carbs: 23,
+            fat: 20,
+            imageURL: ''
+          },
+          {
+            name: 'Caesar Salad',
+            yield: 4,
+            servings: 2,
+            calories:400,
+            protein: 40,
+            carbs: 9,
+            fat: 10,
+            imageURL: ''
+          },
+          {
+            name: 'Blueberry Pancakes',
+            yield: 5,
+            servings: 2,
+            calories:860,
+            protein: 50,
+            carbs: 18,
+            fat: 20,
+            imageURL: ''
+          },
+          {
+            name: 'Blueberry Pancakes',
+            yield: 3,
+            servings: 2,
+            calories:860,
+            protein: 50,
+            carbs: 18,
+            fat: 20,
+            imageURL: ''
+          },
+        ]
       },
-      totalRecipes: 4,
-      recipes:[
-        {
-          name: 'Chicken Pasta',
-          noOfServings: 2,
-          cal:640,
-          protein: 50,
-          carbs: 23,
-          fat: 20,
-          imageURL: ''
-        },
-        {
-          name: 'Caesar Salad',
-          noOfServings: 2,
-          cal:400,
-          protein: 40,
-          carbs: 9,
-          fat: 10,
-          imageURL: ''
-        },
-        {
-          name: 'Blueberry Pancakes',
-          noOfServings: 2,
-          cal:860,
-          protein: 50,
-          carbs: 18,
-          fat: 20,
-          imageURL: ''
-        },
-        {
-          name: 'Blueberry Pancakes',
-          noOfServings: 2,
-          cal:860,
-          protein: 50,
-          carbs: 18,
-          fat: 20,
-          imageURL: ''
-        },
-      ]
-    },
-    { 
-      name: 'My Collection 2',
-      totalMacros: {
-        carbs: 50,
-        fat: 50,
-        protein: 140,
-        cals: 1900
-      },
-      totalRecipes: 3,
-      recipes:[
-        {
-          name: 'Chicken Pasta',
-          noOfServings: 2,
-          cal:640,
-          protein: 50,
-          carbs: 23,
-          fat: 20,
-          imageURL: ''
-        },
-        {
-          name: 'Caesar Salad',
-          noOfServings: 2,
-          cal:400,
-          protein: 40,
-          carbs: 9,
-          fat: 10,
-          imageURL: ''
-        },
-        {
-          name: 'Blueberry Pancakes',
-          noOfServings: 2,
-          cal:860,
-          protein: 50,
-          carbs: 18,
-          fat: 20,
-          imageURL: ''
-        },
-        {
-          name: 'Blueberry Pancakes',
-          noOfServings: 2,
-          cal:860,
-          protein: 50,
-          carbs: 18,
-          fat: 20,
-          imageURL: ''
-        },
-      ]
-    }]
+      { 
+        name: 'My Collection 2',
+        totalCarbs: 50,
+        totalFat: 50,
+        totalProtein: 140,
+        totalCa: 1900,
+        totalRecipes: 4,
+        recipes:[
+          {
+            name: 'Chicken Pasta',
+            yield: 2,
+            servings: 2,
+            calories:640,
+            protein: 50,
+            carbs: 23,
+            fat: 20,
+            imageURL: ''
+          },
+          {
+            name: 'Caesar Salad',
+            yield: 4,
+            servings: 2,
+            calories:400,
+            protein: 40,
+            carbs: 9,
+            fat: 10,
+            imageURL: ''
+          },
+          {
+            name: 'Blueberry Pancakes',
+            yield: 5,
+            servings: 2,
+            calories:860,
+            protein: 50,
+            carbs: 18,
+            fat: 20,
+            imageURL: ''
+          },
+          {
+            name: 'Blueberry Pancakes',
+            yield: 3,
+            servings: 2,
+            calories:860,
+            protein: 50,
+            carbs: 18,
+            fat: 20,
+            imageURL: ''
+          },
+        ]
+      }
+    ]
+
 
   const [savedCollections, setSavedCollections] = useState(recipeCollections);
 
@@ -116,26 +120,16 @@ const Home = () => {
     // make delete request to backend
     // console.log('DELETED SOMETHING', collectionName);
   }
-
-  // useEffect( ()=>{
-  //   //const userCollections = await fetch('/collection') 
-  // }, [])
-
-  const deleteRecipeCollectionItem = (collectionItemName) => {
-
-  }
-  
   
 
-    const allSavedCollections = savedCollections.map((singleCollection, i) => (
-      <RecipeCollection 
-        collection={singleCollection}
-        deleteRecipeCollection={deleteRecipeCollection}
-        deleteRecipeCollectionItem={deleteRecipeCollectionItem}
-        location={'home'}
-        key = {i}
-      />
-    ))
+  const allSavedCollections = savedCollections.map((singleCollection, i) => (
+    <RecipeCollection 
+      collection={singleCollection}
+      deleteRecipeCollection={deleteRecipeCollection}
+      location={'home'}
+      key = {i}
+    />
+  ))
     return (
         <div>
           <h1>Saved Collections</h1>
