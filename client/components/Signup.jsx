@@ -44,7 +44,7 @@ const Signup = ({setLogged, isLogged}) => {
           }
           
           {/* {isLogged && (<Navigate to='/new_user'/>)} */}
-          { isSignedUp && <SetUp isLogged={isLogged} setLogged={setLogged}/>}
+          { isSignedUp && <SetUp isLogged={isLogged} setLogged={setLogged} username={username} password={password}/>}
         {/* </div> */}
 
         

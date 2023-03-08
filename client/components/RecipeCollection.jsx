@@ -4,12 +4,23 @@ import RecipeTemplate from './RecipeTemplate.jsx';
 import RecipeCollectionItem from './RecipeCollectionItem.jsx';
 
 const RecipeCollection = (props) => {
+  /*
+    name: req.body.name,
+    recipes: [],
+    totalFat: fat,
+    totalCarbs: carbs,
+    totalProtein: protein,
+    totalCalories: calories,
+
+
+    recipes: [] => recipe {
+      
+    }
+  */
 
   const { deleteRecipeCollection } = props;
 
   const { setSavedCollections } = props;
-
-  // deleteRecipeCollection 
   
   const {collection, setCurrentCollection, location} = props
 
@@ -25,6 +36,7 @@ const RecipeCollection = (props) => {
         fat = {recipe.fat}
         url = {recipe.imageURL}
         id = {num++}
+        //recipe url needed
         collection = {collection}
         setCurrentCollection = {setCurrentCollection}
         location = {location}
