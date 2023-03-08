@@ -82,9 +82,9 @@ recipeController.saveRecipes = async (req, res, next) => {
 };
 
 recipeController.sortRecipes = async (req, res, next) => {
-  const username = 'username';
+  // const username = 'username';
 
-  //const username = req.cookies.username;
+  const username = req.cookies.username;
   const user = await User.findOne({ username });
   console.log('did it get the user', user);
   const userMacros = [
