@@ -35,3 +35,42 @@ collectionController.generateSavedCollection = (req, res, next) => {
 }
 
 module.exports = collectionController;
+
+
+
+
+
+
+
+
+
+//   //for demo
+//   const { recipes } = res.locals;
+//   for (const recipe of recipes){
+//     recipe.servings = 1;
+//   }
+
+//   // initialize empty recipeId array on res.locals
+//   res.locals.recipeIds = [];
+//   // iterate through all recipes of recipe array
+
+//   // define total Carbs, total Fat, and total Prot, total cals;
+//   res.locals.totals = { fat: 0, carbs: 0, protein: 0, calories: 0 };
+//   for (const recipe of recipes) {
+    
+//         // (err, recipe) => {
+//         //   if (err) {
+//         //     return next({ message: { err: "error in saveRecipes!" } });
+//         //   }
+//           // push created recipe ID to recipeID array
+//           res.locals.recipeIds.push(recipee._id);
+//         };
+//       res.locals.totals.calories += (servings * calories) / yield;
+//       res.locals.totals.fat += (servings * fat) / yield;
+//       res.locals.totals.carbs += (servings * carbs) / yield;
+//       res.locals.totals.protein += (servings * protein) / yield;
+//     }
+//     console.log(res.locals);
+//     return next();
+
+// };
