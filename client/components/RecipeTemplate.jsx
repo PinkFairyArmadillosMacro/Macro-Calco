@@ -3,13 +3,26 @@ import { useState, useEffect } from 'react';
 import MyPieChart from './PieChart.jsx';
 
 const RecipeTemplate = (props) => {
-  // console.log('Recipe Template Props', props);
+
   const {name, noOfServings, cal, protein, carbs, fat, imageURL} = props.recipeInfo;
   const {setCurrentCollection, currentCollection} = props;
   const {totalMacros, totalRecipes, recipes} = props.currentCollection
   const [desiredServings, setDesiredServings] = useState(noOfServings);
 
-  //we have setCurrentCollection and currentCollection from props
+  /*
+  What we need from backend when listing recipes:
+  Recipe name
+  image url
+  recipe url
+  Servings per recipe
+    - when we send a recipe to backend, include desired recipes
+  cal 
+  carbs
+  fats 
+  protein
+  health label
+  diet label
+  */
 
   const desiredChange = (e) => {setDesiredServings(e.target.value) }
 
@@ -26,8 +39,6 @@ const RecipeTemplate = (props) => {
     })
     console.log(currentCollection)
   }
-
-  const deleteRecipe = () => {};
 
   const redirectToInfoPage = () => {};
 
