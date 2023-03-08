@@ -5,16 +5,16 @@ import RecipeCollectionItem from './RecipeCollectionItem.jsx';
 
 const RecipeCollection = (props) => {
   /*
-    collection: 
-      name: string
-      recipes: array of recipe objects []
-      totalMacros: {
-        carbs: number
-        fat: number
-        protein: number
-        cals: number
-      }
-      totalRecipes: number
+    name: req.body.name,
+    recipes: [],
+    totalFat: fat,
+    totalCarbs: carbs,
+    totalProtein: protein,
+    totalCalories: calories,
+
+
+    recipes: [] => recipe {
+      
     }
   */
 
