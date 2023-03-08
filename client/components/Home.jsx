@@ -112,34 +112,36 @@ const Home = () => {
     ]
 
 
-  const [savedCollections, setSavedCollections] = useState(recipeCollections);
+  const [savedCollections, setSavedCollections] = useState([]);
 
-  const deleteRecipeCollection = (collectionName) => {
-    const collectionToDelete = recipeCollections.find(collection => collection.name === collectionName);
-    console.log(collectionToDelete);
-    // make delete request to backend
-    // console.log('DELETED SOMETHING', collectionName);
-  }
+  useEffect(()=>{
+    const getSavedCollections = async () => {
+      let response = await fetch('/api/recipe/find')
+      response = await response.json();
+      setSavedCollections(response);
+    }
+    getSavedCollections();
+  }, [])
   
 
   const allSavedCollections = savedCollections.map((singleCollection, i) => (
     <RecipeCollection 
       collection={singleCollection}
-      deleteRecipeCollection={deleteRecipeCollection}
       location={'home'}
       key = {i}
     />
   ))
     return (
         <div>
-          <h1>Saved Collections</h1>
+          <h1 id='home-page-title'>Saved Collections</h1>
           <div id='collection-containers'>
-            {allSavedCollections}
-            {/* <RecipeCollection collection={recipeCollection}/>
-            <RecipeCollection collection={recipeCollection}/>
-            <RecipeCollection collection={recipeCollection}/>
-            <RecipeCollection collection={recipeCollection}/>
-            <RecipeCollection collection={recipeCollection}/> */}
+            {savedCollections.length === 0
+            ?
+              <p>Add a new collection!</p>
+            :
+              {allSavedCollections}
+            }
+          
           </div>
         </div>
     )

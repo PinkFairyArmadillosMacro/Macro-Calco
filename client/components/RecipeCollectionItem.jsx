@@ -5,31 +5,44 @@ const RecipeCollectionItem = (props) => {
 
 
 
-  const { deleteRecipeCollectionItem, collection, setCurrentCollection, location} = props;
+  const { deleteRecipeCollectionItem, collection, setCurrentCollection, location, collectionId} = props;
   const {totalMacros} = collection
-  const {name, servingSize, cals, protein, carbs, fat, url, id} = props;
+  const {name, servings, cals, protein, carbs, fat, url, id} = props;
   const noOfServings = props.yield;
 
-  const handleDeleteItem = (e) => { 
+  const handleDeleteItem = async(e) => { 
     //if were deleting a recipe from our collection in FindRecipe
     if(location ==='findRecipe'){
       for(let recipeInd in collection.recipes){
-        if(collection.recipes[recipeInd].name === name){
+
+        console.log(collection.recipes[recipeInd])
+        //console.log((Math.floor((cals/noOfServings) * servings)))
+        if(collection.recipes[recipeInd]._id === id){
           const newRecipes = collection.recipes;
           newRecipes.splice(recipeInd, 1)
-          console.log(newRecipes)
-          setCurrentCollection({
-            totalCarbs: totalCarbs - (Math.floor(carbs/noOfServings)* servingSize),
-            totalFat: totalFat - (Math.floor(fat/noOfServings) * servingSize),
-            totalProtein: totalProtein -  (Math.floor(protein/noOfServings) * servingSize),
-            totalCalories: totalCalories -  (Math.floor(cals/noOfServings) * servingSize),
-            recipes: newRecipes,
-            totalRecipes: collection.totalRecipes - 1
+          console.log('Total cals:', cals)
+          console.log('Total yield:', noOfServings)
+          console.log('Desired servings:', servings)
+
+          console.log((Math.floor((cals/noOfServings) * servings)))
+          setCurrentCollection(prevCollection =>  {
+            return ({
+              ...prevCollection,
+              totalCarbs: prevCollection.totalCarbs - carbs,
+              totalFat: prevCollection.totalFat - fat,
+              totalProtein: prevCollection.totalProtein -  protein,
+              totalCalories: prevCollection.totalCalories -  cals,
+              recipes: newRecipes,
           })
-          console.log(collection)
+        })
+          //console.log(collection)
           break;
         }
       }
+    }
+    if(location === 'home'){
+      // TODO: fix if wrong
+      await fetch(`/api/recipe/collection/?collectionId=${collectionId}&recipeId${id}`)
     }
 
     
@@ -51,7 +64,7 @@ const RecipeCollectionItem = (props) => {
           <div className="recipe-collection-item-table">
             <div className="recipe-collection-item-table-row">
               <p>Serving Size</p>
-              <p>{servingSize}</p>
+              <p>{servings}</p>
             </div>
             <div className="recipe-collection-item-table-row">
               <p>Carbs</p>

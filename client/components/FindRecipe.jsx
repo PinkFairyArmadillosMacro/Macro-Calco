@@ -14,7 +14,6 @@ const FindRecipe = (props) => {
     totalProtein: 0,
     totalFat: 0,
     totalCalories: 0,
-    yield: 0,
     recipes: [],
   });
   const [recipesFromSearch, setRecipesFromSearch] = useState([]);
@@ -87,6 +86,10 @@ const FindRecipe = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log(currentCollection)
+  }, [currentCollection])
+
+  useEffect(() => {
     setRecipeSelection(
       recipesFromSearch.map((recipe, i) => (
         <RecipeTemplate
@@ -120,25 +123,30 @@ const FindRecipe = (props) => {
       body: JSON.stringify({ queryString: searchQuery }),
     });
     response = await response.json();
-    console.log(response);
+    console.log(response[3])
     setRecipesFromSearch(response);
-    console.log(recipesFromSearch);
   };
 
-  const handleCollectionSubmit = async (e) => {
+  const handleCollectionSubmit = (e) => {
     e.preventDefault();
 
     const recipes = [];
     for (let recipe of currentCollection.recipes) {
-      const { servings, label } = recipe;
-      recipes.push({ label, servings });
+      const { servings, label, _id } = recipe;
+      recipes.push({ label, servings, _id });
     }
-    setCurrentCollection({
+    const collectionToAdd = {
       ...currentCollection,
       name: collectionName,
       recipes,
-    });
-    console.log(currentCollection);
+    };
+    fetch('/api/recipe/', {
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(collectionToAdd),
+    })
   };
 
   return (
