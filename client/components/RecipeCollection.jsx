@@ -4,22 +4,9 @@ import RecipeTemplate from './RecipeTemplate.jsx';
 import RecipeCollectionItem from './RecipeCollectionItem.jsx';
 
 const RecipeCollection = (props) => {
-  /*
-    name: req.body.name,
-    recipes: [],
-    totalFat: fat,
-    totalCarbs: carbs,
-    totalProtein: protein,
-    totalCalories: calories,
-
-
-    recipes: [] => recipe {
-      
-    }
-  */
-
+  
   const { deleteRecipeCollection } = props;
-
+  
   const { setSavedCollections } = props;
   
   const {collection, setCurrentCollection, location} = props
@@ -28,21 +15,30 @@ const RecipeCollection = (props) => {
   const recipeCollectionItems = collection.recipes.map((recipe) => {
     return (
       <RecipeCollectionItem 
-        name = {recipe.name}
-        servingSize = {recipe.noOfServings}
-        cals = {recipe.cal}
+        name = {recipe.label}
+        servingSize = {recipe.yield}
+        cals = {recipe.calories}
         protein = {recipe.protein}
         carbs = {recipe.carbs}
         fat = {recipe.fat}
-        url = {recipe.imageURL}
+        url = {recipe.image}
         id = {num++}
         //recipe url needed
         collection = {collection}
         setCurrentCollection = {setCurrentCollection}
         location = {location}
-      />
-    )
-  })
+        />
+        )
+      })
+
+      /*
+        name: { type: String, required: true },
+        totalCarbs: { type: Number, required: true },
+        totalProtein: { type: Number, required: true },
+        totalFat: { type: Number, required: true },
+        totalCalories: { type: Number, required: true },
+        recipeIds: [{ type: Schema.Types.ObjectId, ref: 'recipe' }],
+      */
   return (
     <div className='recipe-collection-container'>
       <div className="collection-totals">
@@ -52,23 +48,23 @@ const RecipeCollection = (props) => {
         <div className="recipe-collection-table">
             <div className="recipe-collection-table-row">
               <p>Carbs</p>
-              <p>{collection.totalMacros.carbs}g</p>
+              <p>{collection.totalCarbs}g</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>Fat</p>
-              <p>{collection.totalMacros.fat}g</p>
+              <p>{collection.totalFat}g</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>Protein</p>
-              <p>{collection.totalMacros.protein}g</p>
+              <p>{collection.totalProtein}g</p>
             </div>
             <div className="recipe-collection-table-row">
               <p>kcal</p>
-              <p>{collection.totalMacros.cals}</p>
+              <p>{collection.totalCalories}</p>
             </div>
           </div>
         </div>
-        <p className='collection-totals-label'> Total Recipes: {collection.totalRecipes} </p>
+        <p className='collection-totals-label'> Total Recipes: {collection.recipeIds.length} </p>
       </div>
       <div className='collection-scroll'>
         {recipeCollectionItems}

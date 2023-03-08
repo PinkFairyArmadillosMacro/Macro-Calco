@@ -19,53 +19,53 @@ const FindRecipe = (props) => {
     }
   );
   const [recipesFromSearch, setRecipesFromSearch] = useState([])
-  const dummyRecipes = [
-    {
-      name: 'Chicken Pasta',
-      noOfServings: 6,
-      cal:640,
-      protein: 50,
-      carbs: 23,
-      fat: 20,
-      imageURL: ''
-    },
-    {
-      name: 'Caesar Salad',
-      noOfServings: 4,
-      cal:400,
-      protein: 40,
-      carbs: 9,
-      fat: 10,
-      imageURL: ''
-    },
-    {
-      name: 'Blueberry Pancakes',
-      noOfServings: 4,
-      cal:860,
-      protein: 32,
-      carbs: 18,
-      fat: 14,
-      imageURL: ''
-    },
-    {
-      name: 'Eggs and Bacon',
-      noOfServings: 2,
-      cal:1200,
-      protein: 55,
-      carbs: 32,
-      fat: 20,
-      imageURL: ''
-    },
-    {
-      name: 'French Toast',
-      noOfServings: 3,
-      cal:860,
-      protein: 50,
-      carbs: 18,
-      fat: 13,
-      imageURL: ''
-    },
-  ]
+  // const dummyRecipes = [
+  //   {
+  //     name: 'Chicken Pasta',
+  //     noOfServings: 6,
+  //     cal:640,
+  //     protein: 50,
+  //     carbs: 23,
+  //     fat: 20,
+  //     imageURL: ''
+  //   },
+  //   {
+  //     name: 'Caesar Salad',
+  //     noOfServings: 4,
+  //     cal:400,
+  //     protein: 40,
+  //     carbs: 9,
+  //     fat: 10,
+  //     imageURL: ''
+  //   },
+  //   {
+  //     name: 'Blueberry Pancakes',
+  //     noOfServings: 4,
+  //     cal:860,
+  //     protein: 32,
+  //     carbs: 18,
+  //     fat: 14,
+  //     imageURL: ''
+  //   },
+  //   {
+  //     name: 'Eggs and Bacon',
+  //     noOfServings: 2,
+  //     cal:1200,
+  //     protein: 55,
+  //     carbs: 32,
+  //     fat: 20,
+  //     imageURL: ''
+  //   },
+  //   {
+  //     name: 'French Toast',
+  //     noOfServings: 3,
+  //     cal:860,
+  //     protein: 50,
+  //     carbs: 18,
+  //     fat: 13,
+  //     imageURL: ''
+  //   },
+  // ]
 
   // const recipeSchema = new Schema({
   //   label: { type: String, required: true},
@@ -83,7 +83,7 @@ const FindRecipe = (props) => {
   // });
 
   useEffect(() => {
-    handleQuerySubmit()
+    handleQuerySubmit();
   }, [])
 
   const onNameChange = (e) => {setCollectionName(e.target.value)}
@@ -115,8 +115,8 @@ const FindRecipe = (props) => {
 
   const recipeSelection = null;
   useEffect(() => {
-    recipeSelection = recipesFromSearch.map((recipe) => (
-      <RecipeTemplate recipeInfo={recipe} currentCollection={currentCollection} setCurrentCollection={setCurrentCollection}/>
+    recipeSelection = recipesFromSearch.map((recipe, i) => (
+      <RecipeTemplate key={i} recipeInfo={recipe} currentCollection={currentCollection} setCurrentCollection={setCurrentCollection}/>
     ));
   }, [recipesFromSearch]);
 
@@ -149,7 +149,7 @@ const FindRecipe = (props) => {
             <RecipeCollection collection={currentCollection} setCurrentCollection={setCurrentCollection} location='findRecipe'/>  
             <form id='current-recipe-name-form'>
               <p>Enter Collection Name</p>
-              <input placeholder='(Ex: My Collection 1)'></input>
+              <input placeholder='(Ex: My Collection 1)' onChange={onNameChange}></input>
               <button onClick={handleCollectionSubmit}>Add to My Collections</button>
             </form>
           </div>
