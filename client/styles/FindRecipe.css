@@ -114,4 +114,9 @@
 
 #add-collection-button{
   padding: .2rem .7rem;
+  
+}
+
+#add-collection-button:hover{
+  cursor: pointer;
 }

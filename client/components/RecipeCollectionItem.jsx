@@ -25,10 +25,10 @@ const RecipeCollectionItem = (props) => {
           setCurrentCollection(prevCollection =>  {
             return ({
               ...prevCollection,
-              totalCarbs: prevCollection.totalCarbs - carbs,
-              totalFat: prevCollection.totalFat - fat,
-              totalProtein: prevCollection.totalProtein -  protein,
-              totalCalories: prevCollection.totalCalories -  cals,
+              totalCarbs: round(prevCollection.totalCarbs - (carbs / noOfServings) * servings),
+              totalFat: round(prevCollection.totalFat- (fat / noOfServings) * servings),
+              totalProtein: round(prevCollection.totalProtein - (protein / noOfServings) * servings),
+              totalCalories: round(prevCollection.totalCalories - (cals / noOfServings) * servings),
               recipes: newRecipes,
           })
         })
@@ -43,6 +43,7 @@ const RecipeCollectionItem = (props) => {
         method: 'DELETE'
       })
       // post request
+      props.setHasDeleted(prev => !prev);
     }
 
     

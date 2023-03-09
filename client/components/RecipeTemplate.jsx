@@ -37,10 +37,10 @@ const RecipeTemplate = (props) => {
       label,
       yield: noOfServings,
       servings: desiredServings,
-      calories: Math.floor((calories / noOfServings) * desiredServings),
-      protein: Math.floor((protein / noOfServings) * desiredServings),
-      carbs: Math.floor((carbs / noOfServings) * desiredServings),
-      fat: Math.floor((fat / noOfServings) * desiredServings),
+      calories,
+      protein,
+      carbs,
+      fat,
       image,
     });
     console.log('totalCarbs before adding:', totalCarbs)

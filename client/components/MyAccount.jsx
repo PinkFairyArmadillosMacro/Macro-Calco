@@ -8,6 +8,8 @@ const MyAccount = (props) => {
   const [carbs, setCarbs] = useState(0)
   const [proteins, setProteins] = useState(0)
   const [fats, setFats] = useState(0)
+  const [isSetUp, setIsSetUp] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
  
   const [user, setUser] = useState({
     username: '',
@@ -25,7 +27,7 @@ const MyAccount = (props) => {
       setUser(response);
     }
     getUser();
-  }, [])
+  }, [isSetUp])
 
   const calsChange = (e) => {setCalories(e.target.value)}
   const carbsChange = (e) => {setCarbs(e.target.value)}
@@ -35,6 +37,12 @@ const MyAccount = (props) => {
   const handleUpdateMacros = async (e) => {
     //if (carbs+proteins+fats !== 100) return
     e.preventDefault();
+    setUser({
+      calorieGoal: calories,
+      fatGoal: fats,
+      proteinGoal: proteins,
+      carbsGoal: carbs
+    })
     const sendUpdates = await fetch('/api/user/updatemacros', {
       method: 'PATCH',
       headers: {
@@ -47,6 +55,7 @@ const MyAccount = (props) => {
         carbsGoal: carbs
       })
     })
+    setIsSetUp(!isSetUp);
   }
 
   // username: { type: String, required: true, unique: true },
@@ -68,16 +77,16 @@ const MyAccount = (props) => {
         <h1 id="Macro-title">Update your desired daily macros:</h1>
         <form className="macro-update-form">
           <input placeholder="Calories" className="input-tag" name='calories' autoComplete="off" onChange={calsChange} required></input>
-          <p className='current-update-macro-total'> Current Calories: {user.calorieGoal} </p>
+          <p className='current-update-macro-total'> Current Calories: <b>{user.calorieGoal}</b> </p>
           <input placeholder="Carbs (%)" className="input-tag" name='carbs' autoComplete="off" onChange={carbsChange} required></input>
-          <p className='current-update-macro-total'> Current Carbs: {user.carbsGoal} </p>
+          <p className='current-update-macro-total'> Current Carbs: <b>{user.carbsGoal}</b> </p>
           <input placeholder="Protein (%)" className="input-tag" name='proteins' autoComplete="off" onChange={proteinsChange} required></input>
-          <p className='current-update-macro-total'> Current Protein: {user.proteinGoal} </p>
+          <p className='current-update-macro-total'> Current Protein: <b>{user.proteinGoal}</b> </p>
           <input placeholder="Fats (%)" className="input-tag" name='fats' autoComplete="off" onChange={fatsChange} required></input>
-          <p className='current-update-macro-total'> Current Fats: {user.fatGoal} </p>
+          <p className='current-update-macro-total'> Current Fats: <b>{user.fatGoal}</b> </p>
           <p id="macros-subtext">*Carbs, Proteins, and Fats must total to 100%
           </p>
-          <button id="login-button" type='button' onClick={handleUpdateMacros}>Submit</button>
+          <button id="myaccount-button" type='button' onClick={handleUpdateMacros}>Submit</button>
         </form>
       </div>
     </div>
