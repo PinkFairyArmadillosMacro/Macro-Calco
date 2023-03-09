@@ -73,7 +73,7 @@ const FindRecipe = (props) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ queryString: "rice" }),
+      body: JSON.stringify({ queryString: searchQuery }),
     });
     response = await response.json();
     console.log(response[3])

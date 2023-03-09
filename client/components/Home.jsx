@@ -133,10 +133,10 @@ const Home = () => {
         
         const recipes = [];
         for (let recipe of singleCollection.recipes) {
-          const { label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein} = recipe.recipeId;
+          const { label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein, _id} = recipe.recipeId;
           const servings =  recipe.servings
           const noOfServings = recipe.recipeId.yield;
-          recipes.push({servings, label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein, noOfServings})
+          recipes.push({servings, label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein, noOfServings, _id})
         }
         const newCollection = {
           name,

@@ -12,7 +12,7 @@ const RecipeCollection = (props) => {
 
   const recipeCollectionItems = collection.recipes.map((recipe,i) => { // {servings, recipeId}
     // const {label, calories, protein, carbs, fat, image, _id} = recipe.recipeId;
-    let noOfServings = 1;
+    let noOfServings;
     if (recipe.noOfServings !== undefined) noOfServings = recipe.noOfServings;
     else{ noOfServings = recipe.yield}
     //console.log('no of servings', noOfServings)

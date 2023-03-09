@@ -39,9 +39,11 @@ const RecipeCollectionItem = (props) => {
     }
     if(location === 'home'){
       // TODO: fix if wrong
-      await fetch(`/api/recipe/collection/${collectionId}${recipeId: id}` + new URLSearchParams({collectionId,  recipeId: id}), {
+      let recipeId = id
+      await fetch((`/api/recipe/${recipeId}/${collectionId}`), {
         method: 'DELETE'
       })
+      // post request
     }
 
     
