@@ -18,6 +18,7 @@ const userSchema = new Schema({
   fatGoal: Number,
   carbsGoal: Number,
   proteinGoal: Number,
+  update: { type: Boolean, default: true },
 });
 
 const SALT_WORK_FACTOR = 10;
@@ -60,6 +61,8 @@ const recipeSchema = new Schema({
   fat: { type: Number, required: true },
   carbs: { type: Number, required: true },
   protein: { type: Number, required: true },
+
+  //users: [{relevance: Number, userID: {}}]
 });
 const Recipe = mongoose.model('recipe', recipeSchema);
 
