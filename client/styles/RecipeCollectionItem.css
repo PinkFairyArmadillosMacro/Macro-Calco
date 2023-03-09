@@ -87,6 +87,11 @@ RECIPE COLLECTION ITEM
 
 .recipe-collection-item-delete-btn {
   background-color: red;
+  border: 1px solid red;
+}
+
+.recipe-collection-item-delete-btn:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .recipe-collection-item-delete-btn:active {

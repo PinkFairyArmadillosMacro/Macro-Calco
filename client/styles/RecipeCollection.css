@@ -15,6 +15,10 @@ RECIPE COLLECTION
   /* height: fit-content */
 }
 
+.recipe-collection-container:hover{
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
 /* .collection-totals {
   display: flex;
   flex-direction: column;
@@ -90,6 +94,11 @@ RECIPE COLLECTION
 
 .recipe-collection-delete-btn {
   background-color: red;
+  border: 1px solid red;
+}
+
+.recipe-collection-delete-btn:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .recipe-collection-delete-btn:active {
