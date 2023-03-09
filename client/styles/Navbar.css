@@ -21,14 +21,32 @@ header div h1 {
   align-items: center;
 }
 
+
+
 .nav-links a {
   color: black;
   text-decoration: none;
   margin: 0.75rem;
+  
+}
+
+.nav-links a:hover{
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .nav-links button {
   font-family: var(--main-font);
   padding: 0.65rem;
   margin-right: 0.75rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid var(--tertiary-color);
+  transition: 0.15s;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+  background-color: var(--tertiary-color);
+  color: white;
+}
+
+.nav-links button:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }

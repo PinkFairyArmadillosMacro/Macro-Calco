@@ -6,6 +6,7 @@ import DoughnutChart from './DoughnutChart.jsx';
 const RecipeCollection = (props) => {
     
   const {collection, setCurrentCollection, location} = props
+  const data = [collection.totalCarbs, collection.totalFat, collection.totalProtein];
 
   const recipeCollectionItems = collection.recipes.map((recipe,i) => { // {servings, recipeId}
     let noOfServings;
@@ -77,7 +78,11 @@ const RecipeCollection = (props) => {
       <div className='collection-scroll'>
         {recipeCollectionItems}
       </div>
-      <DoughnutChart/>
+      <div id='chart-container'>
+        <DoughnutChart data = {data}/>
+      </div>
+
+      
       <div className="recipe-collection-buttons">
         {location === 'home'
           ?        

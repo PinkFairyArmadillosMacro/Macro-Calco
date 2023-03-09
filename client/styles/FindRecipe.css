@@ -100,6 +100,13 @@
   height: 110px;
 }
 
+#current-recipe-name-form p{
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+} 
+
 #current-recipe-form-input{
   width: 80%;
   padding: .5rem;
@@ -113,10 +120,18 @@
 }
 
 #add-collection-button{
-  padding: .2rem .7rem;
-  
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  width: 80%;
+  padding: 5px 0;
+  transition: 0.15s;
+  border: 1px solid var(--tertiary-color);
+  background-color: var(--tertiary-color);
+  color: white;
 }
 
 #add-collection-button:hover{
-  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }

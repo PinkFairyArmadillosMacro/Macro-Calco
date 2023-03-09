@@ -1,18 +1,21 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(ArcElement);
+Chart.register(ChartDataLabels)
 
 const DoughnutChart = (props) => {
-  const data = {
+  const {data} = props
+  const dataInfo = {
     labels: [
-      'Red',
-      'Blue',
-      'Yellow'
+      'Protein',
+      'Fat',
+      'Carbs'
     ],
     datasets: [{
       label: 'My First Dataset',
-      data: [50,50],
+      data: data,
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
@@ -24,20 +27,27 @@ const DoughnutChart = (props) => {
   return (
     <div>
       <Doughnut 
-      data={data}
+      data={dataInfo}
       options={{
         plugins: {
           title: {
             display: true,
             text: "Users Gained between 2016-2020"
           },
-          legend: {
-            display: true,
+          datalabels: {
+            color: 'blue',
             labels: {
-                color: 'rgb(255, 99, 132)'
+              title: {
+                font: {
+                  weight: 'bold'
+                }
+              },
+              value: {
+                color: 'green'
+              }
             }
-        }
-        }
+          }
+        } 
       }}
       />
     </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import RecipeTemplate from './RecipeTemplate.jsx';
 import RecipeCollection from './RecipeCollection.jsx';
+import { Navigate } from 'react-router-dom';
 
 const FindRecipe = (props) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -16,6 +17,7 @@ const FindRecipe = (props) => {
   });
   const [recipesFromSearch, setRecipesFromSearch] = useState([]);
   const [recipeSelection, setRecipeSelection] = useState([]);
+  const [recipeCreated, setRecipeCreated] = useState(false);
   
   useEffect(() => {
     handleQuerySubmit();
@@ -63,7 +65,7 @@ const FindRecipe = (props) => {
     setRecipesFromSearch(response);
   };
 
-  const handleCollectionSubmit = (e) => {
+  const handleCollectionSubmit = async (e) => {
     e.preventDefault();
 
     const recipes = [];
@@ -77,13 +79,14 @@ const FindRecipe = (props) => {
       name: collectionName,
       recipes,
     };
-    fetch('/api/collection', {
+    await fetch('/api/collection', {
       method:'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(collectionToAdd),
     })
+    setRecipeCreated(true);
   };
 
   return (
@@ -140,7 +143,7 @@ const FindRecipe = (props) => {
         />
 
       </div>
-
+      {recipeCreated && (<Navigate to='/home'/>)}
     </div>
   );
 };
