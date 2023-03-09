@@ -5,16 +5,15 @@ const Collection = models.Collection;
 
 const recipeController = {};
 
+const timer = async (ms) => new Promise((res) => setTimeout(res, ms));
 //MIGHT NEED TO DEBGUG FOR &q= AT THE END
 //IMAGE EXPIRES IN 60 MINUTES SO REPOPULATE DB BEFORE DEMO
 const baseURL =
   'https://api.edamam.com/api/recipes/v2?type=public&app_id=df53c42b&app_key=42722d0f8c7171ba43d1b261ca01b673&ingr=1%2B&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients&q=';
 
-
-const calculateRelevance = (recipeMacros, userMacros) => {
+const calculateRelevance = (normalized, macroRatio) => {
   //recipesMacros, userMacros = [calories, fat, carb, protein]
   // invoke convert to proportions to get percentages ie -> [2000, .25, .5, .25];
-  let normalizedRecipe = normalizeRecipe(recipeMacros);
   let relevance =
     Math.abs(normalized[0] - macroRatio[0]) +
     Math.abs(normalized[1] - macroRatio[1]) +
@@ -46,7 +45,8 @@ const getRatioArray = (increment) => {
       if (a + b > step) break;
       for (let c = 0; c <= step; c++) {
         if (a + b + c > step) break;
-        if (a + b + c === step) arr.push([a*increment, b*increment, c*increment]);
+        if (a + b + c === step)
+          arr.push([a * increment, b * increment, c * increment]);
       }
     }
   }
@@ -64,7 +64,7 @@ recipeController.saveRecipes = async (req, res, next) => {
   console.log('this is url', url);
   let ini = performance.now();
 
-  for (let numRecipes = 0; numRecipes <= 1000; numRecipes += 20) {
+  for (let numRecipes = 0; numRecipes <= 20; numRecipes += 20) {
     const response = await fetch(url);
     const jsonResponse = await response.json();
     let recipes = jsonResponse.hits;
@@ -106,7 +106,7 @@ recipeController.saveRecipes = async (req, res, next) => {
     }
     url = jsonResponse._links.next.href;
 
-    await timer(6000);
+    //await timer(6000);
   }
 
   let end = performance.now();
@@ -138,7 +138,7 @@ recipeController.calcRelevance = async (req, res, next) => {
   for (const recipe of recipes) {
     recipeMacros = [recipe.calories, recipe.fat, recipe.carbs, recipe.protein];
     normalized = normalizeRecipe(recipeMacros);
-for (ratio of ratioArray){
+    for (ratio of ratioArray) {
       relevanceObj[ratio] = calculateRelevance(normalized, ratio);
     }
     recipe.relevance = relevanceObj;
@@ -177,10 +177,18 @@ recipeController.deleteRecipe = async (req, res, next) => {
   // update macros
   const recipeServing = collection.recipes[index].servings;
   console.log('SERVINGS:', recipeServing);
-  collection.totalCarbs -= Math.round((recipe.carbs / recipe.yield) * recipeServing);
-  collection.totalProtein -= Math.round((recipe.protein / recipe.yield) * recipeServing);
-  collection.totalFat -= Math.round((recipe.fat / recipe.yield) * recipeServing);
-  collection.totalCalories -= Math.round((recipe.calories / recipe.yield) * recipeServing);
+  collection.totalCarbs -= Math.round(
+    (recipe.carbs / recipe.yield) * recipeServing
+  );
+  collection.totalProtein -= Math.round(
+    (recipe.protein / recipe.yield) * recipeServing
+  );
+  collection.totalFat -= Math.round(
+    (recipe.fat / recipe.yield) * recipeServing
+  );
+  collection.totalCalories -= Math.round(
+    (recipe.calories / recipe.yield) * recipeServing
+  );
   // delete recipe from collection array
   collection.recipes.splice(index, 1);
   // save the collction
