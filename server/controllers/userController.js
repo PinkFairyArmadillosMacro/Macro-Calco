@@ -35,6 +35,8 @@ userController.verifyUser = async (req, res, next) => {
     if (!username || !password) {
       res.locals.isLogged = false;
       return next();
+      // return next('Invalid username or password in userController.verifyUser.');
+
     }
     // `findOne` returns a document/model instances, while
     // `find` returns a query object, which has no access to the methods
