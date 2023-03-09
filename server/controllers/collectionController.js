@@ -9,15 +9,14 @@ const collectionController = {};
 //   totalProtein: { type: Number, required: true },
 //   totalFat: { type: Number, required: true },
 //   totalCalories: { type: Number, required: true },
-//   recipeIds: [{ type: Schema.Types.ObjectId, ref: 'recipe' }],
+//   recipes: [{ servings: Number, recipeId: { type: Schema.Types.ObjectId, ref: 'recipe' }}],
 // });
 
 collectionController.createCollection = async (req, res, next) => {
 
   const { recipes, name, totalCalories, totalFat, totalCarbs, totalProtein } = req.body;
-  const recipeIds = recipes.map(recipe => recipe._id);
   //create collection
-  const collection = await Collection.create({ name, totalCarbs, totalProtein, totalFat, totalCalories, recipeIds });
+  const collection = await Collection.create({ name, totalCarbs, totalProtein, totalFat, totalCalories, recipes });
 
   //save it to user
   username = req.cookies.username;

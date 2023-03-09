@@ -18,54 +18,7 @@ const FindRecipe = (props) => {
   });
   const [recipesFromSearch, setRecipesFromSearch] = useState([]);
   const [recipeSelection, setRecipeSelection] = useState([]);
-  // const dummyRecipes = [
-  //   {
-  //     name: 'Chicken Pasta',
-  //     noOfServings: 6,
-  //     cal:640,
-  //     protein: 50,
-  //     carbs: 23,
-  //     fat: 20,
-  //     imageURL: ''
-  //   },
-  //   {
-  //     name: 'Caesar Salad',
-  //     noOfServings: 4,
-  //     cal:400,
-  //     protein: 40,
-  //     carbs: 9,
-  //     fat: 10,
-  //     imageURL: ''
-  //   },
-  //   {
-  //     name: 'Blueberry Pancakes',
-  //     noOfServings: 4,
-  //     cal:860,
-  //     protein: 32,
-  //     carbs: 18,
-  //     fat: 14,
-  //     imageURL: ''
-  //   },
-  //   {
-  //     name: 'Eggs and Bacon',
-  //     noOfServings: 2,
-  //     cal:1200,
-  //     protein: 55,
-  //     carbs: 32,
-  //     fat: 20,
-  //     imageURL: ''
-  //   },
-  //   {
-  //     name: 'French Toast',
-  //     noOfServings: 3,
-  //     cal:860,
-  //     protein: 50,
-  //     carbs: 18,
-  //     fat: 13,
-  //     imageURL: ''
-  //   },
-  // ]
-
+  
   // const recipeSchema = new Schema({
   //   label: { type: String, required: true},
   //   servings: { type: Number, required: true},
@@ -120,7 +73,7 @@ const FindRecipe = (props) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ queryString: searchQuery }),
+      body: JSON.stringify({ queryString: "rice" }),
     });
     response = await response.json();
     console.log(response[3])
@@ -132,15 +85,16 @@ const FindRecipe = (props) => {
 
     const recipes = [];
     for (let recipe of currentCollection.recipes) {
-      const { servings, label, _id } = recipe;
-      recipes.push({ label, servings, _id });
+      const { servings, _id } = recipe;
+      const recipeId = _id
+      recipes.push({ servings, recipeId });
     }
     const collectionToAdd = {
       ...currentCollection,
       name: collectionName,
       recipes,
     };
-    fetch('/api/recipe/', {
+    fetch('/api/collection', {
       method:'POST',
       headers: {
         'Content-Type': 'application/json',
