@@ -12,7 +12,7 @@ const RecipeCollection = (props) => {
 
   const recipeCollectionItems = collection.recipes.map((recipe,i) => { // {servings, recipeId}
     // const {label, calories, protein, carbs, fat, image, _id} = recipe.recipeId;
-    let noOfServings = 1;
+    let noOfServings;
     if (recipe.noOfServings !== undefined) noOfServings = recipe.noOfServings;
     else{ noOfServings = recipe.yield}
     //console.log('no of servings', noOfServings)
@@ -33,6 +33,7 @@ const RecipeCollection = (props) => {
         setCurrentCollection = {setCurrentCollection}
         location = {location}
         collectionId = {collection._id}
+        setHasDeleted = {props.setHasDeleted}
         />
         )
     }
@@ -41,9 +42,15 @@ const RecipeCollection = (props) => {
   const handleClick = async(e) => {
     e.preventDefault();
     const id = collection._id
-
-    await fetch(`/api/recipe/collection/?id=${id}`);
-
+    
+    const response = await fetch(`/api/collection/${id}`,{
+      method: 'DELETE'
+      }
+    );
+    if(response.json()){
+      console.log('deleted a collection')
+      props.setHasDeleted(prev => !prev);
+    }
   }
 
 

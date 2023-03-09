@@ -30,7 +30,9 @@ collectionController.createCollection = async (req, res, next) => {
 
 collectionController.deleteCollection = async (req, res, next) => {
   const username = req.cookies.username;
-  const { _id } = req.params;
+  const { id } = req.params;  // api/collection/{id : 423423545423523}
+  console.log('id is', id)
+  const _id = id
   await Collection.deleteOne({ _id });
 
   const user = User.findOne({ username });

@@ -52,7 +52,7 @@ const SetUp = (props) => {
           </p>
           <button id="login-button" type='button' onClick={handleSubmit}>Submit</button>
         </form>
-        {isSetUp && (<Navigate to='/home'/>)}
+        {props.isLogged && (<Navigate to='/home'/>)}
       </div>
     </div>
   )

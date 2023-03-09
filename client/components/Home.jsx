@@ -114,6 +114,7 @@ const Home = () => {
 
   const [savedCollections, setSavedCollections] = useState([]);
   const [allSavedCollections, setAllSavedCollections] = useState([]);
+  const [hasDeleted, setHasDeleted] = useState(false);
 
   useEffect(()=>{
     const getSavedCollections = async () => {
@@ -122,23 +123,24 @@ const Home = () => {
       setSavedCollections(response.collections);
     }
     getSavedCollections();
-  }, [])
+  }, [hasDeleted])
 
   useEffect(()=>{
     console.log('save collections', savedCollections)
     setAllSavedCollections(
       savedCollections.map((singleCollection, i) => {
-        const {name, totalCarbs, totalProtein, totalFat, totalCalories} = singleCollection
+        const {name, totalCarbs, totalProtein, totalFat, totalCalories, _id} = singleCollection
         
         const recipes = [];
         for (let recipe of singleCollection.recipes) {
-          const { label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein} = recipe.recipeId;
+          const { label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein, _id} = recipe.recipeId;
           const servings =  recipe.servings
           const noOfServings = recipe.recipeId.yield;
-          recipes.push({servings, label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein, noOfServings})
+          recipes.push({servings, label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein, noOfServings, _id})
         }
         const newCollection = {
           name,
+          _id,
           totalCarbs,
           totalProtein, 
           totalFat, 
@@ -151,6 +153,7 @@ const Home = () => {
           collection={newCollection}
           location='home'
           key = {i}
+          setHasDeleted = {setHasDeleted}
           />
         )
 

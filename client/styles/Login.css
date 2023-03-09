@@ -33,6 +33,7 @@
   margin-top: 4rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 60%;
 }
 
@@ -43,4 +44,23 @@
 .input-tag {
   margin: 1rem 0;
   text-indent: 0.3rem;
+}
+
+#login-button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 0 10px;
+  width: 200px;
+  padding: 10px 0;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+  transition: 0.15s;
+  border: 1px solid #609966;
+  background-color: #609966;
+  color: white;
+}
+
+#login-button:hover {
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
 }
