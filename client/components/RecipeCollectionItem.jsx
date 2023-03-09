@@ -15,8 +15,6 @@ const RecipeCollectionItem = (props) => {
     if(location ==='findRecipe'){
       for(let recipeInd in collection.recipes){
 
-        console.log(collection.recipes[recipeInd])
-        //console.log((Math.floor((cals/noOfServings) * servings)))
         if(collection.recipes[recipeInd]._id === id){
           const newRecipes = collection.recipes;
           newRecipes.splice(recipeInd, 1)
@@ -35,14 +33,15 @@ const RecipeCollectionItem = (props) => {
               recipes: newRecipes,
           })
         })
-          //console.log(collection)
           break;
         }
       }
     }
     if(location === 'home'){
       // TODO: fix if wrong
-      await fetch(`/api/recipe/collection/?collectionId=${collectionId}&recipeId${id}`)
+      await fetch('/api/recipe/collection/' + new URLSearchParams({collectionId,  recipeId: id}), {
+        method: 'DELETE'
+      })
     }
 
     
