@@ -7,7 +7,7 @@ const recipeController = {};
 
 //MIGHT NEED TO DEBGUG FOR &q= AT THE END
 //IMAGE EXPIRES IN 60 MINUTES SO REPOPULATE DB BEFORE DEMO
-const baseURL = 'https://api.edamam.com/api/recipes/v2?type=public&app_id=df53c42b&app_key=42722d0f8c7171ba43d1b261ca01b673&ingr=1%2B&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients'
+const baseURL = 'https://api.edamam.com/api/recipes/v2?type=public&app_id=df53c42b&app_key=42722d0f8c7171ba43d1b261ca01b673&ingr=1%2B&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients&q='
 
 
 const calculateRelevance = (recipeMacros, userMacros) => {
@@ -38,26 +38,24 @@ const normalizeRecipe = (macros) => {
 
 recipeController.saveRecipes = async (req, res, next) => {
   // save recipe to the collection in mongoose
-  // const url = baseURL + req.body.queryString; //url going to the fetch
+  let url = baseURL + req.body.queryString; //url going to the fetch
   // const response = await fetch(url);
   // const jsonResponse = await response.json();
   // const recipes = jsonResponse.hits;
   // const next = jsonResponse._links.next.href;
   // await fetch(next)
-
-  let url = baseURL;
-
+  console.log('this is url', url);
   let ini = performance.now();
 
-  for (let numRecipes = 0; numRecipes <= 1000; numRecipes += 20) {
+  for (let numRecipes = 0; numRecipes <= 200; numRecipes += 20) {
     const response = await fetch(url);
     const jsonResponse = await response.json();
     let recipes = jsonResponse.hits;
     for (let i=0; i<recipes.length; i++) {
-      // const { label } = recipeObj.recipe;
+      const { label } = recipes[i].recipe;
       // check for if recipe is in collection
-      // let recipeInDB = await Recipe.exists({ label });
-      // if (!recipeInDB) {
+      let recipeInDB = await Recipe.exists({ label });
+      if (!recipeInDB) {
         // create recipe document if not in database
         const {
           label,
@@ -87,7 +85,7 @@ recipeController.saveRecipes = async (req, res, next) => {
           carbs,
           protein,
         });
-      // }
+      }
     }
     url = jsonResponse._links.next.href;
   }
@@ -113,7 +111,7 @@ recipeController.sortRecipes = async (req, res, next) => {
   ];
 
   let recipeMacros;
-  const recipes = await Recipe.find({}); //returns array of recipe documents
+  const recipes = await Recipe.find({ label: req.body.queryString }); //returns array of recipe documents
   for (const recipe of recipes) {
     recipeMacros = [recipe.calories, recipe.fat, recipe.carbs, recipe.protein];
 
@@ -122,7 +120,7 @@ recipeController.sortRecipes = async (req, res, next) => {
   }
   console.log('did it get recipe', 1);
   recipes.sort((a, b) => a.relevance - b.relevance);
-  res.locals.recipesToSend = recipes;
+  res.locals.recipesToSend = recipes.slice(0,100);
 
   return next();
 };

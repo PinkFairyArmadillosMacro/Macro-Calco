@@ -11,9 +11,9 @@ router.post('/', createCollection, (req, res) => {
 
 // TODO
 // get ALL saved collections from user
-router.get('/', generateSavedCollection, (req, res) => {
-  return res.status(200).send('hello')
-})
+// router.get('/', generateSavedCollection, (req, res) => {
+//   return res.status(200).send('hello')
+// })
 
 // TODO
 // delete a saved collection from user by id

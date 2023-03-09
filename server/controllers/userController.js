@@ -70,8 +70,17 @@ userController.verifyUser = async (req, res, next) => {
 
 userController.getUser = async (req, res, next) => {
   const username = req.cookies.username;
-  const user = await User.findOne({ username }).populate('collections');
-  console.log('in get user', user);
+  const user = await User.findOne({ username })
+                         .populate(
+                          {
+                            path: 'collections',
+                            populate: { 
+                              path: 'recipes.recipeId',
+                            }, 
+                            // select: 'recipes.servings'
+                          });
+  // console.log('in get user', user);
+  // console.log('user recipes', user.collections[0].recipes);
   res.locals.user = user;
 
   return next();

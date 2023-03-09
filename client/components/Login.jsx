@@ -29,9 +29,9 @@ const Login = ({setLogged, isLogged}) => {
       },
     })
 
-    const loginResponse = nonJSON.json();
-
-    setLogged(true)
+    const loginResponse = await nonJSON.json();
+    console.log(loginResponse)
+    setLogged(loginResponse)
   }
 
   return(

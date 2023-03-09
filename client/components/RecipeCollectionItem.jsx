@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-
+import { round  } from './RecipeTemplate.jsx';
 const RecipeCollectionItem = (props) => {
 
 
@@ -68,19 +68,19 @@ const RecipeCollectionItem = (props) => {
             </div>
             <div className="recipe-collection-item-table-row">
               <p>Carbs</p>
-              <p>{carbs}g</p>
+              <p>{round((carbs / noOfServings) * servings)}g</p>
             </div>
             <div className="recipe-collection-item-table-row">
               <p>Fat</p>
-              <p>{fat}g</p>
+              <p>{round((fat / noOfServings) * servings)}g</p>
             </div>
             <div className="recipe-collection-item-table-row">
               <p>Protein</p>
-              <p>{protein}g</p>
+              <p>{round((protein / noOfServings) * servings)}g</p>
             </div>
             <div className="recipe-collection-item-table-row">
               <p>kcal</p>
-              <p>{cals}</p>
+              <p>{round((cals / noOfServings) * servings)}</p>
             </div>
           </div>
         </div>

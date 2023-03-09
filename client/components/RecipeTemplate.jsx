@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import MyPieChart from './PieChart.jsx';
 
-const round = (macro) => {
+export const round = (macro) => {
   return macro < 0.5 ? 0 : macro < 1 ? '< 1' : Math.floor(macro);
 };
 

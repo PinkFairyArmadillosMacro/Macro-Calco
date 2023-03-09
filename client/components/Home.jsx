@@ -113,34 +113,61 @@ const Home = () => {
 
 
   const [savedCollections, setSavedCollections] = useState([]);
+  const [allSavedCollections, setAllSavedCollections] = useState([]);
 
   useEffect(()=>{
     const getSavedCollections = async () => {
-      let response = await fetch('/api/recipe/find')
+      let response = await fetch('/api/user/myaccount')
       response = await response.json();
-      setSavedCollections(response);
+      setSavedCollections(response.collections);
     }
     getSavedCollections();
   }, [])
-  
 
-  const allSavedCollections = savedCollections.map((singleCollection, i) => (
-    <RecipeCollection 
-      collection={singleCollection}
-      location={'home'}
-      key = {i}
-    />
-  ))
+  useEffect(()=>{
+    console.log('save collections', savedCollections)
+    setAllSavedCollections(
+      savedCollections.map((singleCollection, i) => {
+        const {name, totalCarbs, totalProtein, totalFat, totalCalories} = singleCollection
+        
+        const recipes = [];
+        for (let recipe of singleCollection.recipes) {
+          const { label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein} = recipe.recipeId;
+          const servings =  recipe.servings
+          const noOfServings = recipe.recipeId.yield;
+          recipes.push({servings, label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein, noOfServings})
+        }
+        const newCollection = {
+          name,
+          totalCarbs,
+          totalProtein, 
+          totalFat, 
+          totalCalories,
+          recipes
+        }
+
+        return (
+          <RecipeCollection 
+          collection={newCollection}
+          location='home'
+          key = {i}
+          />
+        )
+
+      }
+
+    ))
+  },[savedCollections])
+  
+  // useEffect(()=>{
+  //   //console.log('collections to render', allSavedCollections)
+  // },[allSavedCollections])
+
     return (
         <div>
           <h1 id='home-page-title'>Saved Collections</h1>
           <div id='collection-containers'>
-            {savedCollections.length === 0
-            ?
-              <p>Add a new collection!</p>
-            :
-              {allSavedCollections}
-            }
+            {allSavedCollections}
           
           </div>
         </div>
