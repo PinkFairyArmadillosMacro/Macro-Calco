@@ -9,6 +9,7 @@ const recipeController = {};
 //IMAGE EXPIRES IN 60 MINUTES SO REPOPULATE DB BEFORE DEMO
 const baseURL = 'https://api.edamam.com/api/recipes/v2?type=public&app_id=df53c42b&app_key=42722d0f8c7171ba43d1b261ca01b673&ingr=1%2B&field=label&field=image&field=shareAs&field=yield&field=dietLabels&field=healthLabels&field=cautions&field=calories&field=totalNutrients&q='
 
+const timer = async ms => new Promise(res => setTimeout(res,ms));
 
 const calculateRelevance = (recipeMacros, userMacros) => {
   //recipesMacros, userMacros = [calories, fat, carb, protein]
@@ -47,7 +48,7 @@ recipeController.saveRecipes = async (req, res, next) => {
   console.log('this is url', url);
   let ini = performance.now();
 
-  for (let numRecipes = 0; numRecipes <= 200; numRecipes += 20) {
+  for (let numRecipes = 0; numRecipes <= 1000; numRecipes += 20) {
     const response = await fetch(url);
     const jsonResponse = await response.json();
     let recipes = jsonResponse.hits;
@@ -88,6 +89,8 @@ recipeController.saveRecipes = async (req, res, next) => {
       }
     }
     url = jsonResponse._links.next.href;
+
+    await timer(6000);
   }
 
   let end = performance.now();
