@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({setLogged}) => {
+    const handleClick = () => {
+        setLogged(prev => !prev)
+    }
     return (
         <header>
             <div>
@@ -19,8 +22,8 @@ const Navbar = () => {
                 <Link to='myaccount'>
                     <a>My Account</a>
                 </Link>
-                <Link to='logout'>
-                    <button>Logout</button>
+                <Link to='signout'>
+                    <button onClick={handleClick}>Logout</button>
                 </Link>
             </nav>
         </header>

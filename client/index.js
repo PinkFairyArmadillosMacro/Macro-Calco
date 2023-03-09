@@ -9,6 +9,7 @@ import MyAccount from "./components/MyAccount.jsx";
 import styles from './styles/styles.css';
 import SetUp from "./components/SetUp.jsx";
 import Signup from "./components/Signup.jsx";
+import SignOut from "./components/SignOut.jsx"
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
       {
         path: 'myaccount',
         element: <MyAccount/>
-      }
+      },
+      {
+        path: 'signout',
+        element: <SignOut/>
+      }, 
     ]
   }
 ])
