@@ -77,7 +77,7 @@ const RecipeCollection = (props) => {
       <div className='collection-scroll'>
         {recipeCollectionItems}
       </div>
-      {/* <DoughnutChart/> */}
+      <DoughnutChart/>
       <div className="recipe-collection-buttons">
         {location === 'home'
           ?        
