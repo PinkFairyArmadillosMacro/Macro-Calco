@@ -5,8 +5,7 @@ const RecipeCollectionItem = (props) => {
 
 
 
-  const { deleteRecipeCollectionItem, collection, setCurrentCollection, location, collectionId} = props;
-  const {totalMacros} = collection
+  const { collection, setCurrentCollection, location, collectionId} = props;
   const {name, servings, cals, protein, carbs, fat, url, id} = props;
   const noOfServings = props.yield;
 

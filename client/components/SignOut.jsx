@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Navigate} from "react-router-dom";
+import { Link, Navigate, Outlet} from "react-router-dom";
 
 const SignOut = () => {
   
@@ -10,8 +10,9 @@ const SignOut = () => {
         <h1 id="login-title">You have successfully logged out!</h1>
 
         <p>New User?</p>
-        <Link to='login'>
+        <Link to='/'>
           <a>Back to Login</a> 
+
         </Link>
         
       </div>

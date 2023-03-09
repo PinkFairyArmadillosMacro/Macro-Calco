@@ -43,7 +43,12 @@
 
 .input-tag {
   margin: 1rem 0;
+  padding: 1rem;
   text-indent: 0.3rem;
+}
+
+.input-tag:focus{
+  outline: none;
 }
 
 #login-button {
@@ -59,6 +64,8 @@
   border: 1px solid #609966;
   background-color: #609966;
   color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 #login-button:hover {

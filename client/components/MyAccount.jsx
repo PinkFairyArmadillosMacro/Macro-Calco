@@ -8,7 +8,6 @@ const MyAccount = (props) => {
   const [carbs, setCarbs] = useState(0)
   const [proteins, setProteins] = useState(0)
   const [fats, setFats] = useState(0)
-  const [isSetUp, setIsSetUp] = useState(false)
  
   const [user, setUser] = useState({
     username: '',
