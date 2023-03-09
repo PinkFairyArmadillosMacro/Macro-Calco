@@ -43,11 +43,11 @@ const DoughnutChart = (props) => {
                 }
               },
               value: {
-                color: 'green'
+                color: 'white'
               }
             }
           }
-        } 
+        }
       }}
       />
     </div>

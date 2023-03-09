@@ -7,6 +7,7 @@ const RecipeCollection = (props) => {
     
   const {collection, setCurrentCollection, location} = props
   const data = [collection.totalCarbs, collection.totalFat, collection.totalProtein];
+ // const data =  [{id: 'Protein', nested: {value: collection.totalProtein}}, {id: 'Fat', nested: {value: collection.totalFat}}, {id: 'Carbs', nested: {value: collection.totalCarbs}}];
 
   const recipeCollectionItems = collection.recipes.map((recipe,i) => { // {servings, recipeId}
     let noOfServings;
