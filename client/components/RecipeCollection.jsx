@@ -33,6 +33,7 @@ const RecipeCollection = (props) => {
         setCurrentCollection = {setCurrentCollection}
         location = {location}
         collectionId = {collection._id}
+        setHasDeleted = {props.setHasDeleted}
         />
         )
     }
@@ -41,9 +42,15 @@ const RecipeCollection = (props) => {
   const handleClick = async(e) => {
     e.preventDefault();
     const id = collection._id
-
-    await fetch(`/api/recipe/collection/?id=${id}`);
-
+    
+    const response = await fetch(`/api/collection/${id}`,{
+      method: 'DELETE'
+      }
+    );
+    if(response.json()){
+      console.log('deleted a collection')
+      props.setHasDeleted(prev => !prev);
+    }
   }
 
 
