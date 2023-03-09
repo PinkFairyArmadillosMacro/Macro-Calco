@@ -5,8 +5,7 @@ const RecipeCollectionItem = (props) => {
 
 
 
-  const { deleteRecipeCollectionItem, collection, setCurrentCollection, location, collectionId} = props;
-  const {totalMacros} = collection
+  const { collection, setCurrentCollection, location, collectionId} = props;
   const {name, servings, cals, protein, carbs, fat, url, id} = props;
   const noOfServings = props.yield;
 
@@ -26,10 +25,10 @@ const RecipeCollectionItem = (props) => {
           setCurrentCollection(prevCollection =>  {
             return ({
               ...prevCollection,
-              totalCarbs: prevCollection.totalCarbs - carbs,
-              totalFat: prevCollection.totalFat - fat,
-              totalProtein: prevCollection.totalProtein -  protein,
-              totalCalories: prevCollection.totalCalories -  cals,
+              totalCarbs: round(prevCollection.totalCarbs - (carbs / noOfServings) * servings),
+              totalFat: round(prevCollection.totalFat- (fat / noOfServings) * servings),
+              totalProtein: round(prevCollection.totalProtein - (protein / noOfServings) * servings),
+              totalCalories: round(prevCollection.totalCalories - (cals / noOfServings) * servings),
               recipes: newRecipes,
           })
         })
@@ -40,10 +39,31 @@ const RecipeCollectionItem = (props) => {
     if(location === 'home'){
       // TODO: fix if wrong
       let recipeId = id
-      await fetch((`/api/recipe/${recipeId}/${collectionId}`), {
-        method: 'DELETE'
+      let response = await fetch((`/api/recipe/${recipeId}/${collectionId}`), {
+        method: 'PATCH'
       })
+      response = response.json();
+      // const {name, totalCarbs, totalProtein, totalFat, totalCalories, _id} = response
+        
+      // const recipes = [];
+      // for (let recipe of response.recipes) {
+      //   const { label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein, _id} = recipe.recipeId;
+      //   const servings =  recipe.servings
+      //   const noOfServings = recipe.recipeId.yield;
+      //   recipes.push({servings, label, shareAs, image, dietLabels, healthLabels, cautions, calories, carbs, fat, protein, noOfServings, _id})
+      // }
+      // const newCollection = {
+      //   name,
+      //   _id,
+      //   totalCarbs,
+      //   totalProtein, 
+      //   totalFat, 
+      //   totalCalories,
+      //   recipes
+      // }
+      // setCurrentCollection(newCollection)
       // post request
+      props.setHasDeleted(prev => !prev);
     }
 
     

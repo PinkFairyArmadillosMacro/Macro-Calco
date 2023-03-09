@@ -22,7 +22,7 @@ const Navbar = ({setLogged}) => {
                 <Link to='myaccount'>
                     <a>My Account</a>
                 </Link>
-                <Link to='signout'>
+                <Link id='signout-button-container' to='signout'>
                     <button onClick={handleClick}>Logout</button>
                 </Link>
             </nav>
