@@ -1,16 +1,22 @@
 const express = require('express');
 const router = express.Router();
 
-const { createUser, verifyUser, updateMacros, getUser} = require('../controllers/userController');
+const {
+  createUser,
+  verifyUser,
+  updateMacros,
+  getUser,
+} = require('../controllers/userController');
+const { sortRecipes } = require('../controllers/recipeController');
 
 // TODO
-router.post('/signup', createUser, (req, res) => {
+router.post('/signup', createUser, sortRecipes, (req, res) => {
   return res.status(200).json(res.locals.user);
 });
 
 // TODO
-router.post('/login', verifyUser, (req, res) => {
-  console.log('test', req.body)
+router.post('/login', verifyUser, sortRecipes, (req, res) => {
+  console.log('test', req.body);
   return res.status(200).json(res.locals.isLogged);
 });
 
@@ -20,9 +26,10 @@ router.get('/myaccount', getUser, (req, res) => {
 
 // TODO
 // update user's macros based on username
-router.patch('/updatemacros', updateMacros, (req, res) => {
-  const { calorieGoal, proteinGoal, carbsGoal, fatGoal } = res.locals.updatedUserMacros;
+router.patch('/updatemacros', updateMacros, sortRecipes, (req, res) => {
+  const { calorieGoal, proteinGoal, carbsGoal, fatGoal } =
+    res.locals.updatedUserMacros;
   return res.status(200).json({ calorieGoal, proteinGoal, carbsGoal, fatGoal });
-})
+});
 
 module.exports = router;
