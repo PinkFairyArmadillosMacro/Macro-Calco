@@ -49,6 +49,13 @@ userController.verifyUser = async (req, res, next) => {
       return next();
       // return next('Invalid authentication.');
     } else {
+      //TEMPORARY SOLUTION TO RECALCULATE RELEVANCE UPON DIFFERENT USER LOGIN
+      if(req.cookies.username !== username){
+        user.update = true;
+        await user.save();
+      }
+
+
       res.cookie('username', username);
       res.locals.isLogged = true;
     }
@@ -101,6 +108,9 @@ userController.updateMacros = async (req, res, next) => {
   const user = await User.findOneAndUpdate({ username: username }, req.body, {
     new: true,
   });
+  //set update flag to true
+  user.update = true;
+  await user.save();
 
   if (!user) {
     return next('No user to update');

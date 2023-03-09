@@ -102,32 +102,57 @@ recipeController.sortRecipes = async (req, res, next) => {
 
   const username = req.cookies.username;
   const user = await User.findOne({ username });
-  console.log('did it get the user', user);
-  const userMacros = [
-    user.calorieGoal,
-    user.fatGoal,
-    user.carbsGoal,
-    user.proteinGoal,
-  ];
+  if(user.update){  //need to recalculate relevance
+    const userMacros = [
+      user.calorieGoal,
+      user.fatGoal,
+      user.carbsGoal,
+      user.proteinGoal,
+    ];
+    let recipeMacros;
+    const recipes = await Recipe.find({});
+    
+    for (const recipe of recipes) {
+      recipeMacros = [recipe.calories, recipe.fat, recipe.carbs, recipe.protein];
+      recipe.relevance = calculateRelevance(recipeMacros, userMacros);
+      await recipe.save();
+    }
 
-  let recipeMacros;
-  const recipes = await Recipe.find({ label: req.body.queryString }); //returns array of recipe documents
-  for (const recipe of recipes) {
-    recipeMacros = [recipe.calories, recipe.fat, recipe.carbs, recipe.protein];
-
-    recipe.relevance = calculateRelevance(recipeMacros, userMacros);
-    await recipe.save();
+    user.update = false;
+    await user.save();
   }
-  console.log('did it get recipe', 1);
-  recipes.sort((a, b) => a.relevance - b.relevance);
-  res.locals.recipesToSend = recipes.slice(0,100);
 
   return next();
 };
 
+
+recipeController.searchRecipes = async (req, res, next) => {
+  const recipes = await Recipe.find({ label: { $regex: req.body.queryString, $options: 'i'} });
+  recipes.sort((a, b) => a.relevance - b.relevance);
+  res.locals.recipesToSend = recipes.slice(0,100);
+
+  return next();
+}
+
+
+
+
+
 recipeController.deleteRecipe = async (req, res, next) => {
-  const { recipeId, collectionName } = req.body;
-  const currCollection = await Collection.findOne( { name });
+  const { recipeId, collectionId } = req.params;
+  console.log('recipeId', recipeId)
+  console.log('collectionId', collectionId);
+
+  const collection = await Collection.findOne({_id: collectionId});
+  const index = collection.recipes.indexOf(recipeId);
+  collection.recipes.splice(index,1);
+  await collection.save();
+
+  // const currCollection = await Collection.findOneAndDelete( 
+  //   { _id : collectionId, 
+  //     recipes: { $elemMatch: { _id: recipeId } } 
+  //   });
+  console.log('CURR COLLECTION:', currCollection);
  };
 
 module.exports = recipeController;

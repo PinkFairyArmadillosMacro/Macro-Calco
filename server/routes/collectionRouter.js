@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createCollection, deleteCollection, generateSavedCollection } = require('../controllers/collectionController');
+const { createCollection, deleteCollection } = require('../controllers/collectionController');
 
 // TODO
 // create a collection and save to database
