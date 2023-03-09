@@ -7,11 +7,9 @@ const Login = ({setLogged, isLogged}) => {
 
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
-  //const [isLogged, setIsLogged] = useState(false);
   const [userExists, setUserExists] = useState(false);
 
   const usernameChange = (e) => { setUsername(e.target.value) }
-
   const passwordChange = (e) => { setPassword(e.target.value) }
 
   const handleSubmit = async(e) => {

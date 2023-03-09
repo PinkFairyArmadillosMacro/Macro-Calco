@@ -15,11 +15,9 @@ const SetUp = (props) => {
   const fatsChange = (e) => {setFats(e.target.value)}
 
   const handleSubmit = async (e) => {
-    //if (carbs+proteins+fats !== 100) return
     e.preventDefault();
     console.log(calories, carbs, proteins, fats)
-    // make a post request to /signup
-    // send username, password, calorieGoal, proteinGoal, carbGoal, fatGoal
+
     const body = {
       username: props.username,
       password: props.password,
@@ -28,15 +26,19 @@ const SetUp = (props) => {
       carbsGoal: carbs,
       fatGoal: fats,
     }
-    const response = await fetch('/api/user/signup', {
+    let response = await fetch('/api/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
     })
-    setIsSetUp(true)
-    props.setLogged(true);
+    response = await response.json()
+    if(!response.err){
+      setIsSetUp(true)
+      props.setLogged(true);
+    }
+  
   }
 
   return (

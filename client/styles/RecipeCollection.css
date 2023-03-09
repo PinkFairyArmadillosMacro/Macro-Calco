@@ -12,7 +12,11 @@ RECIPE COLLECTION
   margin: 1rem;
   border-radius: 15px;
   position: relative;
-  height: 650px
+  /* height: fit-content */
+}
+
+.recipe-collection-container:hover{
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 /* .collection-totals {
@@ -90,6 +94,11 @@ RECIPE COLLECTION
 
 .recipe-collection-delete-btn {
   background-color: red;
+  border: 1px solid red;
+}
+
+.recipe-collection-delete-btn:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .recipe-collection-delete-btn:active {
@@ -98,10 +107,18 @@ RECIPE COLLECTION
 
 .collection-scroll {
   overflow-y: scroll;
-  max-height: 400px;
+  max-height: 375px;
   border-radius: 5px;
 }
 
 .collection-scroll::-webkit-scrollbar {
   background: transparent;
+}
+
+#chart-container{
+  position: relative;
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

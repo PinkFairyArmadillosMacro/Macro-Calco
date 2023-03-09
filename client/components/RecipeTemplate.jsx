@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import MyPieChart from './PieChart.jsx';
 
 export const round = (macro) => {
   return macro < 0.5 ? 0 : macro < 1 ? '< 1' : Math.floor(macro);
@@ -27,21 +26,6 @@ const RecipeTemplate = (props) => {
   const { totalCarbs, totalProtein, totalFat, totalCalories, recipes } = props.currentCollection;
   const [desiredServings, setDesiredServings] = useState(noOfServings);
 
-  /*
-  What we need from backend when listing recipes:
-  Recipe name
-  image url
-  recipe url
-  Servings per recipe
-    - when we send a recipe to backend, include desired recipes
-  cal 
-  carbs
-  fats 
-  protein
-  health label
-  diet label
-  */
-
   const desiredChange = (e) => {
     setDesiredServings(e.target.value);
   };
@@ -53,10 +37,10 @@ const RecipeTemplate = (props) => {
       label,
       yield: noOfServings,
       servings: desiredServings,
-      calories: Math.floor((calories / noOfServings) * desiredServings),
-      protein: Math.floor((protein / noOfServings) * desiredServings),
-      carbs: Math.floor((carbs / noOfServings) * desiredServings),
-      fat: Math.floor((fat / noOfServings) * desiredServings),
+      calories,
+      protein,
+      carbs,
+      fat,
       image,
     });
     console.log('totalCarbs before adding:', totalCarbs)

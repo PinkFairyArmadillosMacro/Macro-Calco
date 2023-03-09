@@ -1,21 +1,18 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import RecipeTemplate from './RecipeTemplate.jsx';
 import RecipeCollectionItem from './RecipeCollectionItem.jsx';
+import DoughnutChart from './DoughnutChart.jsx';
 
 const RecipeCollection = (props) => {
-  
-  const { setSavedCollections } = props;
-  
+    
   const {collection, setCurrentCollection, location} = props
-
+  const data = [collection.totalCarbs, collection.totalFat, collection.totalProtein];
+ // const data =  [{id: 'Protein', nested: {value: collection.totalProtein}}, {id: 'Fat', nested: {value: collection.totalFat}}, {id: 'Carbs', nested: {value: collection.totalCarbs}}];
 
   const recipeCollectionItems = collection.recipes.map((recipe,i) => { // {servings, recipeId}
-    // const {label, calories, protein, carbs, fat, image, _id} = recipe.recipeId;
     let noOfServings;
     if (recipe.noOfServings !== undefined) noOfServings = recipe.noOfServings;
     else{ noOfServings = recipe.yield}
-    //console.log('no of servings', noOfServings)
     return (
       <RecipeCollectionItem
         key = {i}
@@ -53,15 +50,6 @@ const RecipeCollection = (props) => {
     }
   }
 
-
-      /*
-        name: { type: String, required: true },
-        totalCarbs: { type: Number, required: true },
-        totalProtein: { type: Number, required: true },
-        totalFat: { type: Number, required: true },
-        totalCalories: { type: Number, required: true },
-        recipeIds: [{ type: Schema.Types.ObjectId, ref: 'recipe' }],
-      */
   return (
     <div className='recipe-collection-container'>
       <div className="collection-totals">
@@ -87,11 +75,15 @@ const RecipeCollection = (props) => {
             </div>
           </div>
         </div>
-        <p className='collection-totals-label'> Total Recipes: {collection.recipes.length} </p>
       </div>
       <div className='collection-scroll'>
         {recipeCollectionItems}
       </div>
+      <div id='chart-container'>
+        <DoughnutChart data = {data}/>
+      </div>
+
+      
       <div className="recipe-collection-buttons">
         {location === 'home'
           ?        
