@@ -17,6 +17,10 @@
   position: relative;
 }
 
+#recipe-name-scroller{
+  
+}
+
 #recipe-template-title {
   margin: 1rem 0;
   overflow-x: hidden;

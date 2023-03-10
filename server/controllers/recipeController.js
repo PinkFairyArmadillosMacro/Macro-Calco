@@ -4,8 +4,12 @@ const User = models.User;
 const Collection = models.Collection;
 
 const recipeController = {};
-
 const timer = async (ms) => new Promise((res) => setTimeout(res, ms));
+
+const round = (macro) => {
+  return macro < 0.5 ? 0 : macro < 1 ? '< 1' : Math.floor(macro);
+};
+
 //MIGHT NEED TO DEBGUG FOR &q= AT THE END
 //IMAGE EXPIRES IN 60 MINUTES SO REPOPULATE DB BEFORE DEMO
 const baseURL =
@@ -64,7 +68,7 @@ recipeController.saveRecipes = async (req, res, next) => {
   console.log('this is url', url);
   let ini = performance.now();
 
-  for (let numRecipes = 0; numRecipes <= 20; numRecipes += 20) {
+  for (let numRecipes = 0; numRecipes <= 100; numRecipes += 20) {
     const response = await fetch(url);
     const jsonResponse = await response.json();
     let recipes = jsonResponse.hits;
@@ -105,8 +109,7 @@ recipeController.saveRecipes = async (req, res, next) => {
       }
     }
     url = jsonResponse._links.next.href;
-
-    //await timer(6000);
+    await timer(4500);
   }
 
   let end = performance.now();
@@ -128,6 +131,9 @@ recipeController.calcRelevance = async (req, res, next) => {
   //     user.carbsGoal,
   //     user.proteinGoal,
   //   ];
+
+  let ini = performance.now();
+
   let recipeMacros, normalized;
   const relevanceObj = {};
   const ratioArray = getRatioArray(10);
@@ -145,14 +151,19 @@ recipeController.calcRelevance = async (req, res, next) => {
     await recipe.save();
   }
 
+  let end = performance.now();
+  
+  console.log('how long does it take to get relevance for 100 recipes', end-ini)
+
+
   return next();
 };
 
 recipeController.searchRecipes = async (req, res, next) => {
   const username = req.cookies.username;
-  const user = await User.find({ username });
+  const user = await User.findOne({ username });
   const userMacros = [user.fatGoal, user.carbsGoal, user.proteinGoal];
-
+  console.log('does it reach here for userMacros', userMacros);
   const recipes = await Recipe.find({
     label: { $regex: req.body.queryString, $options: 'i' },
   });
@@ -177,16 +188,16 @@ recipeController.deleteRecipe = async (req, res, next) => {
   // update macros
   const recipeServing = collection.recipes[index].servings;
   console.log('SERVINGS:', recipeServing);
-  collection.totalCarbs -= Math.round(
+  collection.totalCarbs -= round(
     (recipe.carbs / recipe.yield) * recipeServing
   );
-  collection.totalProtein -= Math.round(
+  collection.totalProtein -= round(
     (recipe.protein / recipe.yield) * recipeServing
   );
-  collection.totalFat -= Math.round(
+  collection.totalFat -= round(
     (recipe.fat / recipe.yield) * recipeServing
   );
-  collection.totalCalories -= Math.round(
+  collection.totalCalories -= round(
     (recipe.calories / recipe.yield) * recipeServing
   );
   // delete recipe from collection array

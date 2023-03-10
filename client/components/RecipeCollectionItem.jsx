@@ -78,7 +78,7 @@ const RecipeCollectionItem = (props) => {
           </svg>
         </button>
       </div>
-      <p>{name}</p>
+      <p id='recipe-collection-item-name'>{name}</p>
       <div className="recipe-collection-item">
         <img src={url} alt="Recipe Image" />
         <div className="recipe-collection-item-macros">

@@ -18,7 +18,7 @@ router.post('/', createCollection, (req, res) => {
 // TODO
 // delete a saved collection from user by id
 router.delete('/:id', deleteCollection, (req, res) => {
-  return res.status(200).send("collection deleted successfully!");
+  return res.status(200).json("collection deleted successfully!");
 })
 
 module.exports = router;

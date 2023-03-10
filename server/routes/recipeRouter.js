@@ -14,11 +14,11 @@ router.post('/find', searchRecipes, (req, res) => {
   return res.status(200).json(res.locals.recipesToSend);
 });
 
-// router.post('/find/populate', saveRecipes, (req, res) => {
-//   return res.status(200).json(res.locals.recipesToSend);
-// });
+router.post('/find/populate', saveRecipes, (req, res) => {
+  return res.status(200).json(res.locals.recipesToSend);
+});
 
-router.post('/find/populate', calcRelevance, (req, res) => {
+router.post('/find/calcrelevance', calcRelevance, (req, res) => {
   return res.status(200).json(res.locals.recipesToSend);
 });
 

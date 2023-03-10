@@ -33,7 +33,8 @@ const SetUp = (props) => {
       },
       body: JSON.stringify(body)
     })
-    response = await response.json()
+    response = await response.json();
+    console.log(response)
     if(!response.err){
       setIsSetUp(true)
       props.setLogged(true);

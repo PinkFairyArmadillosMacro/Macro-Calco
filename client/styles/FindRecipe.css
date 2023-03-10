@@ -64,10 +64,9 @@
 .recipe-selection {
   display: flex;
   flex-direction: row;
-
+  height: 76vh;
   flex-wrap: wrap;
   overflow-y: scroll;
-  max-height: 100vh;
   /* flex: 2; */
 }
 

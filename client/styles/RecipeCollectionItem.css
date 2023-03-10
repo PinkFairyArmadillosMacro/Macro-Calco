@@ -12,11 +12,20 @@ RECIPE COLLECTION ITEM
   position: relative;
   border-radius: 15px;
   margin-bottom: 0.75rem;
+  height: 200px;
+  justify-content: space-evenly;
+}
+
+#recipe-collection-item-name{
+  padding: 0 1rem;
+  text-align: center;
+  max-width: 320px;
 }
 
 .recipe-collection-item-container p {
   font-size: 0.9rem;
   margin: 0;
+  padding: 0;
 }
 
 .recipe-collection-item {

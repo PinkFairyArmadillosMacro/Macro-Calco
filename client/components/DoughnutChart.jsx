@@ -14,14 +14,14 @@ const DoughnutChart = (props) => {
       'Carbs'
     ],
     datasets: [{
-      label: 'My First Dataset',
-      data: data,
+      labels: ['red', 'green', 'blue'],
+      data: [50,40,10],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
         'rgb(255, 205, 86)'
       ],
-      hoverOffset: 4
+      hoverOffset: 3
     }]
   };
   return (
@@ -35,7 +35,6 @@ const DoughnutChart = (props) => {
             text: "Users Gained between 2016-2020"
           },
           datalabels: {
-            color: 'blue',
             labels: {
               title: {
                 font: {
@@ -46,6 +45,9 @@ const DoughnutChart = (props) => {
                 color: 'white'
               }
             }
+          },
+          labels: {
+            render: 'labels'
           }
         }
       }}

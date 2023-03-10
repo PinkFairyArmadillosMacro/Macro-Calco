@@ -123,9 +123,10 @@ const FindRecipe = (props) => {
     
       <div className="current-recipe-collection">
         <div id='current-name-container'>
-          <form id="current-recipe-name-form">
+          <form id="current-recipe-name-form" autoComplete='off'>
             <p>Enter Collection Name</p>
             <input
+              autoComplete='off'
               id='current-recipe-form-input'
               placeholder="(Ex: My Collection 1)"
               onChange={onNameChange}

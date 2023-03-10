@@ -7,7 +7,7 @@ const {
   updateMacros,
   getUser,
 } = require('../controllers/userController');
-
+const { searchRecipes } = require('../controllers/recipeController')
 // TODO
 router.post('/signup', createUser, (req, res) => {
   return res.status(200).json(res.locals.user);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import RecipeCollection from './RecipeCollection.jsx';
+import { Navigate } from 'react-router-dom';
 
 const MyAccount = (props) => {
 
@@ -26,7 +27,9 @@ const MyAccount = (props) => {
       setUser(response);
     }
     getUser();
-  }, [isSetUp])
+  }, [])
+
+
 
   const calsChange = (e) => {setCalories(e.target.value)}
   const carbsChange = (e) => {setCarbs(e.target.value)}
@@ -88,6 +91,7 @@ const MyAccount = (props) => {
           <button id="myaccount-button" type='button' onClick={handleUpdateMacros}>Submit</button>
         </form>
       </div>
+      {isSetUp && <Navigate to='/find'/>}
     </div>
   )
 }

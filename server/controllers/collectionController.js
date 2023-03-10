@@ -35,11 +35,11 @@ collectionController.deleteCollection = async (req, res, next) => {
   const _id = id
   await Collection.deleteOne({ _id });
 
-  const user = User.findOne({ username });
-  const collectionIndex = user.collections.indexOf(_id);
-  user.collections.splice(collectionIndex, 1);
+  // const user = User.findOne({ username });
+  // const collectionIndex = user.collections.indexOf(_id);
+  // user.collections.splice(collectionIndex, 1);
 
-  await user.save();
+  // await user.save();
 
   return next();
 };

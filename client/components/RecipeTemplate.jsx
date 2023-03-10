@@ -61,7 +61,9 @@ const RecipeTemplate = (props) => {
 
   return (
     <div className="recipe-template-container">
-      <h2 id="recipe-template-title">{label}</h2>
+      <div id='recipe-name-scroller'> 
+        <h2 id="recipe-template-title">{label}</h2>
+      </div>
       <img
         alt="IMAGE"
         className="recipe-image"
@@ -137,7 +139,7 @@ const RecipeTemplate = (props) => {
       </div>
       <form id="desired-serving-form" onSubmit={(e)=>{e.preventDefault()}}>
         <label id="desired-serving-label">
-          Desired # of servings (must be less than servings per recipe)
+          Desired # of servings:
         </label>
         <input onChange={desiredChange} ></input>
       </form>
