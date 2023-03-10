@@ -1,0 +1,34 @@
+/**************** 
+MY ACCOUNT              
+*****************/
+
+.my-account-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  font-family: var(--main-font);
+}
+
+.macro-update-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.macro-update-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.macro-update-form input,
+.macro-update-form button {
+  height: 1.5rem;
+}
+
+
+#macros-subtext {
+  opacity: 50%;
+  margin: 1rem 0;
+}

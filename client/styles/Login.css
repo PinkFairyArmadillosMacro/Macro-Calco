@@ -1,0 +1,46 @@
+/**************** 
+  LOGIN            
+*****************/
+
+#login-component-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+#main-login-title{
+  font-family: var(--main-font);
+  font-size: 4rem;
+  margin-bottom: 3rem;
+  margin-top: 5rem;
+}
+
+#login-container {
+  font-family: var(--main-font);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  height: 500px;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+#form-container {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+#login-title {
+  margin: 0;
+}
+
+.input-tag {
+  margin: 1rem 0;
+  text-indent: 0.3rem;
+}

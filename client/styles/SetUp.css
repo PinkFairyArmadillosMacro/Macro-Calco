@@ -1,0 +1,27 @@
+/**************** 
+ SET UP MACROS              
+*****************/
+
+#macro-setup-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+#macro-setup-form-container {
+  font-family: var(--main-font);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#macro-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+#macros-subtext {
+  opacity: 50%;
+  margin: 1rem 0;
+}
