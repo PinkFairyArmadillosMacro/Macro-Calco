@@ -15,6 +15,7 @@
   font-size: 4rem;
   margin-bottom: 3rem;
   margin-top: 5rem;
+  text-align: center;
 }
 
 #login-container {
@@ -33,14 +34,42 @@
   margin-top: 4rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 60%;
 }
 
 #login-title {
-  margin: 0;
+  margin-top: 3rem;
+  margin-bottom: -2rem;
 }
 
 .input-tag {
   margin: 1rem 0;
+  padding: 1rem;
   text-indent: 0.3rem;
+}
+
+.input-tag:focus{
+  outline: none;
+}
+
+#login-button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 1rem 0 0.4rem 0;
+  width: 90%;
+  padding: 10px 0;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+  transition: 0.15s;
+  border: 1px solid var(--secondary-color);
+  background-color: var(--secondary-color);
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#login-button:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }

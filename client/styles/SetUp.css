@@ -19,6 +19,11 @@
   display: flex;
   flex-direction: column;
   width: 400px;
+  align-items: center;
+}
+
+#macro-form-container input {
+  width: 100%;
 }
 
 #macros-subtext {

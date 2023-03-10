@@ -2,11 +2,20 @@
 RECIPE COLLECTION
 *****************/
 
+#home-page-title{
+  font-family: var(--main-font);
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
 #collection-containers {
   /* display: flex;
    justify-content: space-around; 
   flex-wrap: wrap;
   padding: 0 2rem; */
+  margin-top: 10px;
+  margin-left: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 }
+

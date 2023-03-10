@@ -12,11 +12,20 @@ RECIPE COLLECTION ITEM
   position: relative;
   border-radius: 15px;
   margin-bottom: 0.75rem;
+  height: 200px;
+  justify-content: space-evenly;
+}
+
+#recipe-collection-item-name{
+  padding: 0 1rem;
+  text-align: center;
+  max-width: 320px;
 }
 
 .recipe-collection-item-container p {
   font-size: 0.9rem;
   margin: 0;
+  padding: 0;
 }
 
 .recipe-collection-item {
@@ -87,6 +96,11 @@ RECIPE COLLECTION ITEM
 
 .recipe-collection-item-delete-btn {
   background-color: red;
+  border: 1px solid red;
+}
+
+.recipe-collection-item-delete-btn:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .recipe-collection-item-delete-btn:active {

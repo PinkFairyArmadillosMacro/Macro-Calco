@@ -3,7 +3,7 @@
 *****************/
 
 .recipe-template-container {
-  background-color: #9DC08B;
+  background-color: #9dc08b;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -17,12 +17,25 @@
   position: relative;
 }
 
-#recipe-template-title{
+#recipe-name-scroller{
+  
+}
+
+#recipe-template-title {
   margin: 1rem 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  text-align: center;
+  max-height: 30px;
+}
+
+#recipe-template-title::-webkit-scrollbar {
+  display: none;
 }
 
 .recipe-image {
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .recipe-info {
@@ -78,9 +91,8 @@
  NUTRITION FACTS BOX             
 *****************/
 
-
-#nutrition-facts-container{
-  font-size: .55rem;
+#nutrition-facts-container {
+  font-size: 0.55rem;
   font-family: 'Helvetica';
   display: flex;
   flex-direction: column;
@@ -91,66 +103,78 @@
   background-color: white;
 }
 
-#nutrition-serving-size-container{
+#nutrition-serving-size-container {
   margin-top: 2px;
   border-bottom: 4px solid black;
 }
 
-#nutrition-facts-title{
+#nutrition-facts-title {
   font-weight: 800;
   border-bottom: 1px solid black;
 }
 
-#nutrition-single-serving-title-container{
+#nutrition-single-serving-title-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#nutrition-facts-columns-container{
+#nutrition-facts-columns-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-#nutrition-column-calories-header{
+#nutrition-column-calories-header {
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
 }
 
-#nutrition-column-one, #nutrition-column-two{
+#nutrition-column-one,
+#nutrition-column-two {
   border-right: 1px solid black;
 }
 
-#nutrition-column-one, #nutrition-column-two, #nutrition-column-three{
+#nutrition-column-one,
+#nutrition-column-two,
+#nutrition-column-three {
   padding: 0 3px;
 }
 
-.nutrition-column-header{
+.nutrition-column-header {
   text-align: right;
 }
 
-.nutrition-column-header, #nutrition-column-calories-header{
+.nutrition-column-header,
+#nutrition-column-calories-header {
   border-bottom: 2px solid black;
 }
 
-.nutrition-facts-label{
+.nutrition-facts-label {
   border-bottom: 1px solid black;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
-.nutrition-facts-label-container{
+.nutrition-facts-label-container {
   border-bottom: 2px solid black;
 }
-.single-serv-label, .recipe-serv-label{
+.single-serv-label,
+.recipe-serv-label {
   text-align: right;
+}
+
+#nutrition-health-labels-container {
+  overflow-y: scroll;
+}
+#nutrition-health-labels-container::-webkit-scrollbar {
+  display: none;
 }
 
 /**************** 
 MACROS CONTAINER           
 *****************/
-#template-macros-container{
-  margin-top: .5rem;
+#template-macros-container {
+  margin-top: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -158,12 +182,12 @@ MACROS CONTAINER
   width: 100%;
 }
 
-.pie-chart-text{
+.pie-chart-text {
   font-size: 11rem;
   margin: -1.5rem 0;
 }
 
-#macros-and-chart-container{
+#macros-and-chart-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -171,19 +195,18 @@ MACROS CONTAINER
   width: 100%;
 }
 
-#desired-serving-form{
+#desired-serving-form {
   margin-top: 5px;
   width: 80%;
   display: flex;
   flex-direction: column;
-
 }
 
-#desired-serving-label{
-  font-size: .7rem;
+#desired-serving-label {
+  font-size: 0.7rem;
 }
 
-.recipe-crud-buttons{
+.recipe-crud-buttons {
   display: flex;
   width: 80%;
   justify-content: flex-end;
@@ -194,4 +217,5 @@ MACROS CONTAINER
 
 .add-button:hover {
   cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }

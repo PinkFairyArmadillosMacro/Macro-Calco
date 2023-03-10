@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./components/App.jsx";
 import Home from "./components/Home.jsx";
 import Login from "./components/Login.jsx";
@@ -9,6 +9,7 @@ import MyAccount from "./components/MyAccount.jsx";
 import styles from './styles/styles.css';
 import SetUp from "./components/SetUp.jsx";
 import Signup from "./components/Signup.jsx";
+import SignOut from "./components/SignOut.jsx"
 
 const router = createBrowserRouter([
   {
@@ -34,14 +35,16 @@ const router = createBrowserRouter([
       {
         path: 'myaccount',
         element: <MyAccount/>
-      }
-    ]
+      },
+      {
+        path: 'signout',
+        element: <SignOut/>,
+      }, 
+    ],
   }
 ])
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
     <RouterProvider router={router}/>
-  </React.StrictMode>
 )

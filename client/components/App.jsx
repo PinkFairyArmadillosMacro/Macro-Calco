@@ -9,12 +9,13 @@ import FindRecipe from "./FindRecipe.jsx";
 import MyAccount from "./MyAccount.jsx";
 import SetUp from "./SetUp.jsx";
 import Signup from "./Signup.jsx";
+import SignOut from "./SignOut.jsx";
 const App = () => {
   const [isLogged, setIsLogged] = useState(false)
   return(
     <div>
       {isLogged?
-        <Navbar/>
+        <Navbar setLogged={setIsLogged}/>
         : <></>
       }
       <Routes>
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="home" element={<Home/>}></Route>
         <Route path="find" element={<FindRecipe/>}></Route>
         <Route path="myaccount" element={<MyAccount/>}></Route>
+        <Route path="signout" element={<SignOut/>}></Route>
       </Routes>
 
     </div>
