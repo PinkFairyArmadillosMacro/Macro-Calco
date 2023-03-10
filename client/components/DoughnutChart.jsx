@@ -15,7 +15,7 @@ const DoughnutChart = (props) => {
     ],
     datasets: [{
       labels: ['red', 'green', 'blue'],
-      data: [50,40,10],
+      data: data,
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
